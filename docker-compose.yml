@@ -1,0 +1,33 @@
+version: "3.8"
+
+x-downloads-volume: &downloads-volume
+  type: bind
+  source: ./downloads # downloads folder in local filesystem
+  target: /var/downloads # downloads folder in container
+
+services:
+  willow:
+    build: ./willow
+    ports:
+      - "3000:80"
+    stdin_open: true
+    volumes:
+      - /willow/node_modules
+      - ./willow:/willow
+    tty: true
+    environment:
+      - PORT=80
+      - CHOKIDAR_USEPOLLING=true
+  
+  # willow_api:
+  #   build: ../willow_api
+  #   ports:
+  #     - "9000:80"
+  #   environment:
+  #     - PORT=80
+  #   volumes:
+  #     - ../willow_api:/willow_api
+  #     - /willow_api/node_modules
+  #     - *downloads-volume
+        
+
