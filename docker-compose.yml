@@ -19,15 +19,13 @@ services:
       - PORT=80
       - CHOKIDAR_USEPOLLING=true
   
-  # willow_api:
-  #   build: ../willow_api
-  #   ports:
-  #     - "9000:80"
-  #   environment:
-  #     - PORT=80
-  #   volumes:
-  #     - ../willow_api:/willow_api
-  #     - /willow_api/node_modules
-  #     - *downloads-volume
+  willow_api:
+    build: ./willow_api
+    ports:
+      - "9000:8080"
+    volumes:
+      - ../willow_api:/willow_api
+      - /willow_api/node_modules
+      - *downloads-volume
         
 
