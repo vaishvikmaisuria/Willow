@@ -8,9 +8,9 @@ Simple Stocks Dividend Tracker
 ## Backend Language -> Go and Gin ✅
 ## System -> Linux ✅
 ## Git/Github ✅
-### Version Control and code repository ✅
+### Version Control and code repository 
 ## Docker ✅
-### Containerization so that everything runs as expected ✅
+### Containerization so that everything runs as expected 
 ## Kubernetes 
 ### Container orchestration 
 ## Jenkins 
