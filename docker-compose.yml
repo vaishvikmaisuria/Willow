@@ -22,10 +22,9 @@ services:
   willow_api:
     build: ./willow_api
     ports:
-      - "9000:8080"
+      - "8080:8080"
     volumes:
       - ../willow_api:/willow_api
-      - /willow_api/node_modules
       - *downloads-volume
         
 

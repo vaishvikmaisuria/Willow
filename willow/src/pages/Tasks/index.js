@@ -3,7 +3,7 @@ import { Badge, Box, Heading, Stack } from "@chakra-ui/react";
 import { withSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 import { useAsync } from "react-use";
-import { fetchTasks } from "../../requests/tasks";
+import { fetchDividend } from "../../requests/stocks";
 import Header from "../../components/Header";
 import "./Tasks.css";
 import useStyles from "../../assets/mainStyles";
@@ -46,16 +46,21 @@ export function TaskItem({ task }) {
 }
 // get all the task 
 export function Tasks({ enqueueSnackbar }) {
-  const tasks = useAsync(fetchTasks, []);
+  const tasks = useAsync(fetchDividend, []);
   useEffect(() => {
     if (tasks.error) {
       console.log(tasks.error)
       enqueueSnackbar("Failed fetching tasks", { variant: "error" });
     }
   }, [tasks, enqueueSnackbar]);
-  let botsRunning = 1;
-  let totalCarts = 2;
-  let totalCheckout = 4;
+  
+  let moneyInvested = 1000;
+  let totalDividendM = 0;
+  let totalDividendY = 0;
+  if (tasks.value !== 0){
+    totalDividendY = tasks.value;
+  }
+ 
 
   const classes = useStyles();
   return (
@@ -66,17 +71,17 @@ export function Tasks({ enqueueSnackbar }) {
         <Stack w="100%" direction="row" mt={10} ml={20}>
           <Box w="15%" borderWidth="1.5px" borderRadius="lg" >
             <Box as="button" borderRadius="md" mt={3} px={4} h={8}>
-              Total Money Invested : {" "}{botsRunning} {" "}
+              Total Money Invested : {" "}{moneyInvested} {" "}
             </Box>
           </Box>
           <Box w="15%" h={59} borderWidth="1.5px" borderRadius="lg" >
             <Box as="button" borderRadius="md" mt={3} px={4} h={8}>
-                Total Dividend this Month : {" "}{totalCarts} {" "}
+                Total Dividend this Month : {" "}{totalDividendM} {" "}
             </Box>
           </Box>
           <Box w="15%" h={59} borderWidth="1.5px" borderRadius="lg" >
             <Box as="button" borderRadius="md" mt={3} px={4} h={8}>
-                Total Dividend this Year : {" "}{totalCheckout} {" "}
+                Total Dividend this Year : {" "}{totalDividendY} {" "}
             </Box>
           </Box>
 

@@ -12,7 +12,7 @@ import { withFormik } from "formik";
 import { withSnackbar } from "notistack";
 import * as Yup from "yup";
 import TaskDetailsForm from "./TaskDetailsForm";
-import { createTask } from "../../requests/tasks";
+import { addStock } from "../../requests/stocks";
 
 // Error message for fields in the form 
 const ERROR_MSGS = {
@@ -33,7 +33,6 @@ const CreateTaskSchema = StageOneSchema;
 
 // Check input of stage two of add task form using StageTwoSchema
 function validateStageOne(values) {
-    // console.log(values)
     try {
         StageOneSchema.validateSync({
             name: values.name,
@@ -120,11 +119,9 @@ export const EnhancedMasterForm = withFormik({
         quantity: "",
         price: "",
     }),
-    handleSubmit: async (values, { setSubmitting, resetForm }) => {
-        console.log("Hello")
-        
+    handleSubmit: async (values, { setSubmitting, resetForm }) => {  
         try{
-            const taskRes = await createTask({
+            const taskRes = await addStock({
                 values
             });
             console.log(taskRes)

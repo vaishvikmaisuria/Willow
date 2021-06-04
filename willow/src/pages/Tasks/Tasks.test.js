@@ -1,7 +1,7 @@
 import React from "react";
 import { act, render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { fetchTasks } from "../../requests/tasks";
+import { fetchDividend } from "../../requests/tasks";
 import Tasks from ".";
 import { wrapInAll } from "../../testing/helpers";
 import { mockTasks } from "../../testing/mockData";
@@ -14,7 +14,7 @@ describe("Tasks", () => {
   };
 
   beforeEach(() => {
-    fetchTasks.mockImplementationOnce(() => Promise.resolve(mockTasks));
+    fetchDividend.mockImplementationOnce(() => Promise.resolve(mockTasks));
   });
 
   it("Renders tasks", async () => {
@@ -28,6 +28,6 @@ describe("Tasks", () => {
     mockTasks.forEach((task) => {
       expect(component.getByText(task.name)).toBeInTheDocument();
     });
-    expect(fetchTasks).toHaveBeenCalledTimes(1);
+    expect(fetchDividend).toHaveBeenCalledTimes(1);
   });
 });
