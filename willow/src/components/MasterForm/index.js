@@ -92,7 +92,7 @@ export function MasterForm({
             index={stage -1}
         >
             <TabList style={{ paddingBottom: "2vw" }}>
-                <Tab  onClick={() => setStage(1)}>Product Details</Tab>
+                <Tab  onClick={() => setStage(1)}>Stock Details</Tab>
             </TabList>
 
             <TabPanels>
