@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-import { Badge, Button, Box, Heading, Stack } from "@chakra-ui/react";
+import { Badge, Box, Heading, Stack } from "@chakra-ui/react";
 import { withSnackbar } from "notistack";
-import { ViewIcon, CheckCircleIcon, QuestionIcon } from '@chakra-ui/icons';
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAsync } from "react-use";
 import { fetchTasks } from "../../requests/tasks";
@@ -67,28 +65,19 @@ export function Tasks({ enqueueSnackbar }) {
         <div className={classes.toolbar} />
         <Stack w="100%" direction="row" mt={10} ml={20}>
           <Box w="15%" borderWidth="1.5px" borderRadius="lg" >
-            {/* Total amount of bots running */}
             <Box as="button" borderRadius="md" mt={3} px={4} h={8}>
-              <ViewIcon w={30} h={30} ml={-50} mr={50} color="#5e43fb" />
-              {" "}{botsRunning} {" "}
-                Total Money Invested
-              </Box>
+              Total Money Invested : {" "}{botsRunning} {" "}
+            </Box>
           </Box>
           <Box w="15%" h={59} borderWidth="1.5px" borderRadius="lg" >
-            {/* Total carts */}
             <Box as="button" borderRadius="md" mt={3} px={4} h={8}>
-              <QuestionIcon w={30} h={30} ml={-50} mr={50} color="#f0a278" />
-              {" "}{totalCarts} {" "}
-                Total Dividend this Month
-              </Box>
+                Total Dividend this Month : {" "}{totalCarts} {" "}
+            </Box>
           </Box>
           <Box w="15%" h={59} borderWidth="1.5px" borderRadius="lg" >
-            {/* Total number of items bought */}
             <Box as="button" borderRadius="md" mt={3} px={4} h={8}>
-              <CheckCircleIcon w={30} h={30} ml={-50} mr={50} color="LightGreen" />
-              {" "}{totalCheckout} {" "}
-                Total Dividend this Year
-              </Box>
+                Total Dividend this Year : {" "}{totalCheckout} {" "}
+            </Box>
           </Box>
 
           <Box w="49.5%" h={59} borderWidth="1.5px" borderRadius="lg" >

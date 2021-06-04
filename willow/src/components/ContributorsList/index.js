@@ -1,5 +1,5 @@
 import { Avatar, Heading, Stack, Text } from "@chakra-ui/react";
-import vaishvik from "../../assets/img/vaishvik.PNG";
+import vaishvik from "../../assets/img/vaishvik.png";
 
 import React from "react";
 
