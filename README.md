@@ -4,16 +4,17 @@ Simple Stocks Dividend Tracker
 
 # DevOps Configuration 
 
-## Language -> Go 
-## System -> Linux 
-## Git/Github 
-### Version Control and code repository 
-## Docker
-### Containerization so that everything runs as expected 
-## Jenkins 
-### Auto Testing, building and deployment
+## Frontend -> React ✅
+## Backend Language -> Go and Gin ✅
+## System -> Linux ✅
+## Git/Github ✅
+### Version Control and code repository ✅
+## Docker ✅
+### Containerization so that everything runs as expected ✅
 ## Kubernetes 
 ### Container orchestration 
+## Jenkins 
+### Auto Testing, building and deployment
 ## Prometheus 
 ### Monitoring/ alerting tool 
 
