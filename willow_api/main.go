@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,11 +22,14 @@ var allStock []Stock
 
 func GetDividend() (int, error) {
 	results := 0
-
-	// iterate through all the stocks
-	for i, s := range allStock {
-		// fmt.Println(i, s)
-		results += 10
+	for i := 0; i < len(allStock); i++ {
+		price, err := strconv.Atoi(allStock[i].Price)
+		if err != nil {
+			// handle error
+			fmt.Println(err)
+			os.Exit(2)
+		}
+		results += price
 	}
 
 	return results, nil
@@ -33,7 +39,7 @@ func AddStock(stock Stock) error {
 
 	allStock = append(allStock, stock)
 
-	// fmt.Printf("len=%d cap=%d %v\n", len(allStock), cap(allStock), allStock)
+	fmt.Printf("len=%d cap=%d %v\n", len(allStock), cap(allStock), allStock)
 
 	return nil
 }

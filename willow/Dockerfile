@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine
+FROM node:alpine
 WORKDIR /willow
 # install app dependencies
 COPY ./package.json ./

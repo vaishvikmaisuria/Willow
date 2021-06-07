@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  name: api-deployment
+spec:  
+    replicas: 1
+    selector:   
+      matchLabels:      
+        component: api  
+    template:    
+      metadata:      
+        labels:        
+          component: api    
+      spec:      
+        containers:      
+          - name: api        
+            image: "vaishvik7568/willowapi"
+            ports:
+              - containerPort: 8080        
+            env:
+              - name: REDIS_HOST
+                value: redis-cluser-ip-service
+              - name: REDIS_PORT
+                value: '5432'
+              - name: REDISUSER
+                value: redis
+              - name: REDISDB
+                value: redis 
