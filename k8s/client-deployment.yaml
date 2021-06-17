@@ -3,7 +3,7 @@ kind: Deployment
 metadata:  
   name: client-deployment
 spec:  
-    replicas: 1
+    replicas: 2
     selector:   
       matchLabels:      
         component: client  
@@ -15,10 +15,11 @@ spec:
         containers:      
           - name: client        
             image: "vaishvik7568/willow"
+            imagePullPolicy: Always
             ports:
-              - containerPort: 3000        
+              - containerPort: 80        
             resources:          
               requests:            
-                cpu: 250m
+                cpu: 300m
                 memory: 128Mi 
-           
+        restartPolicy: Always

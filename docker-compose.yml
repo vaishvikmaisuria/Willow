@@ -1,10 +1,5 @@
 version: "3.8"
 
-x-downloads-volume: &downloads-volume
-  type: bind
-  source: ./downloads # downloads folder in local filesystem
-  target: /var/downloads # downloads folder in container
-
 services:
   willow:
     build: ./willow
@@ -25,6 +20,5 @@ services:
       - "8080:8080"
     volumes:
       - ../willow_api:/willow_api
-      - *downloads-volume
-        
+
 

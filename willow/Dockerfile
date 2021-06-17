@@ -1,11 +1,3 @@
-FROM node:alpine
-WORKDIR /willow
-# install app dependencies
-COPY ./package.json ./
-# install node modules
-RUN npm install --silent
-RUN npm install react-scripts@3.4.0 -g --silent
+FROM nginx:stable-alpine
 # add app
-COPY . ./
-# start app
-CMD ["npm", "start"]
+COPY . /usr/share/nginx/html/

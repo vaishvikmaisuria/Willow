@@ -3,9 +3,11 @@ kind: Service
 metadata:      
   name: api-cluster-ip-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:    
     component: api  
   ports:
       - port: 8080      
         targetPort: 8080
+        protocol: TCP
+        nodePort: 32000
