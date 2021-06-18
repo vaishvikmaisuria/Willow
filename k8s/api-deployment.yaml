@@ -1,28 +1,28 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment          # Type of the kubernetes resource
 metadata:  
-  name: api-deployment
+  name: willow-api        # Name of the Kubernetes resource
+  labels:
+    app: willow-api
 spec:  
-    replicas: 1
-    selector:   
-      matchLabels:      
-        component: api  
-    template:    
-      metadata:      
-        labels:        
-          component: api    
-      spec:      
-        containers:      
-          - name: api        
-            image: "vaishvik7568/willowapi"
+    replicas: 1             # Number of pods to run at any given time
+    selector:
+      matchLabels:
+        app: willow-api     # This deployment applies to any Pods matching the specified label
+    template:               # This deployment will create a set of pods using the configurations in this template
+      metadata:             
+        labels:             # The labels that will be applied to all of the pods in this deployment
+          app: willow-api
+      spec:                 # Spec for the container which will run in the Pod
+        containers:
+          - name: willow-api
+            image: "vaishvik7568/willowapi"       # The image we are getting from dockerhub
+            imagePullPolicy: IfNotPresent         # If we have not pulled it before, get it from dockerhub
             ports:
-              - containerPort: 8080        
-            env:
-              - name: REDIS_HOST
-                value: redis-cluser-ip-service
-              - name: REDIS_PORT
-                value: '5432'
-              - name: REDISUSER
-                value: redis
-              - name: REDISDB
-                value: redis 
+              - name: http
+                containerPort: 5000               # Should match the port number that the Go application listens on
+            resources:
+              limits:
+                memory: '128Mi'
+                cpu: '400m'
+            

@@ -45,13 +45,15 @@ A step by step series of examples that tell you how to get a development environ
 ### To check if everything is working
 7. kubectl get all
 8. minikube dashboard
-### Get ip 
-9. minikube ip
+### Get ip of frontend
+9. minikube service willow --url
+### Get ip of backend 
+10. minikube service willow_api --url
 
 ## 🎈 Usage <a name="usage"></a>
 
 - If using only deployment file 
-    - Run `kubectl port-forward deployment/react-docker-k8s 8080:80`
+    - Run `kubectl port-forward deployment/willow 8080:80`
     - Navigate to localhost:8080 on your favorite browser
 
 ## Current Issues <a name = "issues"></a>

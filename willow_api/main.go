@@ -67,6 +67,12 @@ func main() {
 
 	r.Use(CORSMiddleware())
 
+	// endpoint to retrieve "Hello World"
+	r.GET("/", func(context *gin.Context) {
+		results := "Hello World"
+		context.JSON(http.StatusOK, results)
+	})
+
 	// endpoint to retrieve all posted bulletins
 	r.GET("/getDividend/", func(context *gin.Context) {
 		results, err := GetDividend()
@@ -93,7 +99,7 @@ func main() {
 	})
 	// running the http server
 	log.Println("running..")
-	if err := r.Run(":8080"); err != nil {
+	if err := r.Run(":5000"); err != nil {
 		panic(err)
 	}
 }

@@ -41,7 +41,7 @@ What things you need to install and run the application
 > make build
 #### on Windows
 > docker-compose up --build
-- Navigate to localhost:8080 on your favorite browser
+- Navigate to localhost:3000 on your favorite browser
 
 ### Docker images
 #### Frontend -> willow 

@@ -1,14 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:      
-  name: willow-cluster-ip-service
+  name: willow
+  labels: 
+    run: willow
 spec:
   type: NodePort
   selector:    
     app: willow  
   ports:    
       - port: 80
-        targetPort: 80
         protocol: TCP
         name: frontend-port
 

@@ -52,7 +52,7 @@ A step by step series of examples that tell you how to get a development environ
 8. run `go run main.go`
 
 ## 🎈 Usage <a name="usage"></a>
-- Navigate to localhost:8080 on your favorite browser
+- Navigate to localhost:5000 on your favorite browser
 
 ## 🌲Environment Variables<a name = "environment_variables"></a>
 Your environment file should be set up like the follow below: (or look at .env example)

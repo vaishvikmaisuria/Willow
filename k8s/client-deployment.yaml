@@ -3,12 +3,12 @@ kind: Deployment
 metadata:
     name: willow
     labels:
-        app: willow
+      app: willow
 spec:
     replicas: 2
     selector:
-        matchLabels:
-            app: willow
+      matchLabels:
+        app: willow
     template:
       metadata:
         labels:

@@ -22,7 +22,7 @@ services:
   willow_api:
     build: ./willow_api
     ports:
-      - "8080:8080"
+      - "5000:5000"
     volumes:
       - ../willow_api:/willow_api
       - *downloads-volume
