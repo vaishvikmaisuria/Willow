@@ -63,7 +63,7 @@ A step by step series of examples that tell you how to get a development environ
 
 ## Credit <a name = "credit"></a>
 
-Medium: https://betterprogramming.pub/deploy-a-full-stack-go-and-react-app-on-kubernetes-4f31cdd9a48b
-Medium: https://maksood.medium.com/deploy-a-react-app-on-kubernetes-using-docker-129a75b79d58
-
+- Medium: https://betterprogramming.pub/deploy-a-full-stack-go-and-react-app-on-kubernetes-4f31cdd9a48b
+- Medium: https://maksood.medium.com/deploy-a-react-app-on-kubernetes-using-docker-129a75b79d58
+- Medium: https://medium.com/bb-tutorials-and-thoughts/how-to-run-react-with-nodejs-api-on-minikube-732e005272f9
 
