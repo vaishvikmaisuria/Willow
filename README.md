@@ -50,16 +50,16 @@ What things you need to install and run the application
 `vaishvik7568/willowapi`
 
 ## ⚡ UI <a name="ui"></a>
-Images coming soon 
-Starting dashboard
+### Images coming soon 
+### Starting dashboard
 ![screenshot1](/imgs/screenshot-1.png)
-Main page to add stocks 
+### Main page to add stocks 
 ![screenshot2](/imgs/screenshot-2.png)
-NavBar
+### NavBar
 ![screenshot3](/imgs/screenshot-4.png)
-Ligh/Dark mode
+### Ligh/Dark mode
 ![screenshot4](/imgs/screenshot-5.png)
-Usage and Contribution
+### Usage and Contribution
 ![screenshot5](/imgs/screenshot-6.png)
 
 ## Current Issues <a name = "issues"></a>
