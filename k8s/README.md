@@ -49,8 +49,10 @@ A step by step series of examples that tell you how to get a development environ
 9. minikube ip
 
 ## 🎈 Usage <a name="usage"></a>
-- Navigate to localhost:8080 on your favorite browser
 
+- If using only deployment file 
+    - Run `kubectl port-forward deployment/react-docker-k8s 8080:80`
+    - Navigate to localhost:8080 on your favorite browser
 
 ## Current Issues <a name = "issues"></a>
 1. Add Jenkins and Ansible
@@ -59,7 +61,9 @@ A step by step series of examples that tell you how to get a development environ
 
 - Vaishvik Maisuria
 
-## Credit <a name = "authors"></a>
+## Credit <a name = "credit"></a>
 
 Medium: https://betterprogramming.pub/deploy-a-full-stack-go-and-react-app-on-kubernetes-4f31cdd9a48b
+Medium: https://maksood.medium.com/deploy-a-react-app-on-kubernetes-using-docker-129a75b79d58
+
 

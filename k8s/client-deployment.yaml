@@ -1,24 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:  
-  name: client-deployment
-spec:  
-    replicas: 1
-    selector:   
-      matchLabels:      
-        component: client  
-    template:    
-      metadata:      
-        labels:        
-          component: client    
-      spec:      
-        containers:      
-          - name: client        
-            image: "vaishvik7568/willow"
+metadata:
+    name: willow
+    labels:
+        app: willow
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: willow
+    template:
+      metadata:
+        labels:
+            app: willow
+      spec:
+        containers:
+          - name: willow
+            image: vaishvik7568/willow
             ports:
-              - containerPort: 3000        
-            resources:          
-              requests:            
-                cpu: 250m
-                memory: 128Mi 
-           
+              - containerPort: 80
+            resources:
+              limits:
+                memory: '128Mi'
+                cpu: '200m'
+            livenessProbe:
+              httpGet:
+                path: /index.html
+                port: 80
+              initialDelaySeconds: 15
+              timeoutSeconds: 2
+              periodSeconds: 5
+              failureThreshold: 1
+            readinessProbe:
+              httpGet:
+                path: /index.html
+                port: 80
+              initialDelaySeconds: 15
+              periodSeconds: 5
+              failureThreshold: 1
