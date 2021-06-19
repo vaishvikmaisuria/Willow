@@ -49,6 +49,9 @@ What things you need to install and run the application
 #### Backend -> willow_api 
 `vaishvik7568/willowapi`
 
+### Run the Application with Kubernetes 
+see documentation [this README.md](k8s/README.md)  
+
 ## ⚡ UI <a name="ui"></a>
 ### Images coming soon 
 ### Starting dashboard
@@ -63,10 +66,9 @@ What things you need to install and run the application
 ![screenshot5](/imgs/screenshot-6.png)
 
 ## Current Issues <a name = "issues"></a>
-1. Configure Kubernetes and connect frontend and backend
-2. Add Jenkins and Ansible
-3. Add more test
-4. Add ML to predict stocks
+1. Add Jenkins and Ansible
+2. Add more test
+3. Add ML to predict stocks
 
 ## Authors <a name = "authors"></a>
 

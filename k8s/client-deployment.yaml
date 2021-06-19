@@ -5,20 +5,21 @@ metadata:
     labels:
       app: willow
 spec:
-    replicas: 2
+    replicas: 2               # Number of pods to run at any given time
     selector:
       matchLabels:
-        app: willow
-    template:
+        app: willow           # This deployment applies to any Pods matching the specified label
+    template:                 # This deployment will create a set of pods using the configurations in this template
       metadata:
-        labels:
+        labels:               # The labels thaminit will be applied to all of the pods in this deployment
             app: willow
-      spec:
+      spec:                   # Spec for the container which will run in the Pod
         containers:
           - name: willow
-            image: vaishvik7568/willow
+            image: vaishvik7568/willow          # The image we are getting from dockerhub
+            imagePullPolicy: IfNotPresent       # If we have not pulled it before, get it from dockerhub
             ports:
-              - containerPort: 80
+              - containerPort: 80               # Should match the port number that the Go application listens on
             resources:
               limits:
                 memory: '128Mi'

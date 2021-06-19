@@ -34,7 +34,7 @@ A step by step series of examples that tell you how to get a development environ
 3. From the root directory, cd into willow 
     3.1. docker build -t DOCKER_USERNAME/willow .
     3.2. docker push DOCKER_USERNAME/willow 
-4. From the root directory, minikube start
+4. From the root directory, minikube start or minikube start --vm=true
 5. ingress -> `https://kubernetes.github.io/ingress-nginx/deploy/#minikube`
     ### To Fix ingress error
     5.1. minikube delete
@@ -45,10 +45,15 @@ A step by step series of examples that tell you how to get a development environ
 ### To check if everything is working
 7. kubectl get all
 8. minikube dashboard
-### Get ip of frontend
+### Get ip of frontend {Testing}
 9. minikube service willow --url
-### Get ip of backend 
+### Get ip of backend {Testing}
 10. minikube service willow_api --url
+
+### To check if everything is working
+11. Minikube ip 
+### Use result ip address in search bar to view the frontend 
+### To test the api type ip-address/api/PATH 
 
 ## 🎈 Usage <a name="usage"></a>
 

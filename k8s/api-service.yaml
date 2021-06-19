@@ -7,7 +7,7 @@ metadata:
 spec:
   type: NodePort                   # Gives each node an external IP that’s accessible from outside the cluster and also opens a Port.
   selector:    
-    app: willow-api                # Selects any Pod with labels `app=willoe-api`
+    app: willow-api                # Selects any Pod with labels `app=willow-api`
   ports:
       - name: backend-port
         port: 5000

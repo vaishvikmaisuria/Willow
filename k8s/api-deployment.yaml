@@ -11,7 +11,7 @@ spec:
         app: willow-api     # This deployment applies to any Pods matching the specified label
     template:               # This deployment will create a set of pods using the configurations in this template
       metadata:             
-        labels:             # The labels that will be applied to all of the pods in this deployment
+        labels:             # The labels thaminit will be applied to all of the pods in this deployment
           app: willow-api
       spec:                 # Spec for the container which will run in the Pod
         containers:

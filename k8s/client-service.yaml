@@ -1,13 +1,14 @@
 apiVersion: v1
-kind: Service
-metadata:      
-  name: willow
-  labels: 
+kind: Service             # Type of the kubernetes resource
+metadata:
+  name: willow            # Name of the Kubernetes resource
+  labels:                 # Labels that will be applied to the resource
+
     run: willow
 spec:
-  type: NodePort
+  type: NodePort          # Gives each node an external IP that’s accessible from outside the cluster and also opens a Port.
   selector:    
-    app: willow  
+    app: willow           # Selects any Pod with labels `app=willow`
   ports:    
       - port: 80
         protocol: TCP
