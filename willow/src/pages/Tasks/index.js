@@ -86,8 +86,8 @@ export function Tasks({ enqueueSnackbar }) {
           </Box>
 
           <Box w="49.5%" h={59} borderWidth="1.5px" borderRadius="lg" >
-            {/* Start a new Bot */}
-            <AddTaskForm/>
+            {/* Add new Stock form */}
+            <AddTaskForm type="Stock"/>
         
           </Box>
         </Stack>

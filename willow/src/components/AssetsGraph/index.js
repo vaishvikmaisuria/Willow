@@ -2,10 +2,10 @@ import React, { useCallback, useState } from 'react';
 import { PieChart, Pie, Sector } from "recharts";
 
 const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 }
+  { name: "Stocks", value: 80000 },
+  { name: "Property", value: 60000 },
+  { name: "Crypto", value: 100000 },
+  { name: "Other", value: 1000 }
 ];
 
 const renderActiveShape = (props) => {
@@ -67,7 +67,7 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`PV ${value}`}</text>
+      >{`$ ${value}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -75,7 +75,7 @@ const renderActiveShape = (props) => {
         textAnchor={textAnchor}
         fill="#999"
       >
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {`(${(percent * 100).toFixed(2)}%)`}
       </text>
     </g>
   );
@@ -90,15 +90,15 @@ export default function AssetsGraph () {
     [setActiveIndex]
   );
   return (
-    <PieChart width={500} height={500}>
+    <PieChart width={650} height={550}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
         data={data}
-        cx={200}
-        cy={200}
-        innerRadius={60}
-        outerRadius={80}
+        cx={325}
+        cy={250}
+        innerRadius={120}
+        outerRadius={180}
         fill="#8884d8"
         dataKey="value"
         onMouseEnter={onPieEnter}

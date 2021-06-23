@@ -12,15 +12,20 @@ import {
     Button,
     Box,
 } from "@chakra-ui/react"
+import AddPortfolioForm from "../AddPortfolioForm";
 
-function AddTaskForm() {
+function AddTaskForm(prop) {
     const [stage, setStage] = useState(1);
     const { isOpen, onOpen, onClose } = useDisclosure();
     
     const closeModel = () => {
         onClose();
     }
-
+    let buttonText = "Add Stock";
+    if (prop.type === "Portfolio") {
+        buttonText = "Add Portfolio"   
+    }
+  
     return (
         <>
             <Button onClick={onOpen} m={2} ml={5} bg="#826dff">
@@ -28,7 +33,7 @@ function AddTaskForm() {
                     <PlusSquareIcon
                         style={{ size: "2em", marginTop: "2px" }}
                     />{" "}
-                  Add Stock
+                  {buttonText}
                 </Box>
             </Button>
             <Modal
@@ -42,11 +47,19 @@ function AddTaskForm() {
                     <ModalHeader>Create your account</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        <MasterForm
-                            stage={stage}
-                            setClose ={() => closeModel()}
-                            setStage={setStage}
-                        />
+                        {prop.type === "Stock" ? 
+                            <MasterForm
+                                stage={stage}
+                                setClose ={() => closeModel()}
+                                setStage={setStage}
+                            /> : 
+                            <AddPortfolioForm
+                                stage={stage}
+                                setClose ={() => closeModel()}
+                                setStage={setStage}
+                            />
+                        }
+                        
                     </ModalBody>
                     
                 </ModalContent>
