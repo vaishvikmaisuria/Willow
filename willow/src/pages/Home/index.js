@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../../components/Header";
 import useStyles from "../../assets/mainStyles";
 import StockGraph from "../../components/StockGraph";
+import AssetsGraph from "../../components/AssetsGraph";
 
 // landing page for the application 
 export function HomePage() {
@@ -16,10 +17,15 @@ export function HomePage() {
             <Text>
               This page will show the price history
             </Text>
-            
+          </Center>
+          <Center>
+            <Text>
+              This page will show the price history
+            </Text>
           </Center>
           <Center>
             <StockGraph/>
+            <AssetsGraph/>
           </Center>
       </main>
     </div>

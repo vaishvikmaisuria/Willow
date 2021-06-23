@@ -3,47 +3,62 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 
 const data = [
   {
-    name: 'Page A',
+    name: '2021',
     uv: 4000,
     pv: 2400,
-    amt: 2400,
   },
   {
-    name: 'Page B',
+    name: '2022',
     uv: 3000,
     pv: 1398,
-    amt: 2210,
   },
   {
-    name: 'Page C',
+    name: '2023',
     uv: 2000,
     pv: 9800,
-    amt: 2290,
   },
   {
-    name: 'Page D',
+    name: '2024',
     uv: 2780,
     pv: 3908,
-    amt: 2000,
+
   },
   {
-    name: 'Page E',
+    name: '2025',
     uv: 1890,
     pv: 4800,
-    amt: 2181,
+
   },
   {
-    name: 'Page F',
+    name: '2026',
     uv: 2390,
     pv: 3800,
-    amt: 2500,
+
   },
   {
-    name: 'Page G',
+    name: '2027',
     uv: 3490,
     pv: 4300,
-    amt: 2100,
+ 
   },
+  {
+    name: '2028',
+    uv: 3490,
+    pv: 4300,
+ 
+  },
+  {
+    name: '2029',
+    uv: 3490,
+    pv: 4300,
+ 
+  },
+  {
+    name: '2030',
+    uv: 3490,
+    pv: 4300,
+ 
+  }
 ];
 
 export default function StockGraph () {
@@ -51,8 +66,8 @@ export default function StockGraph () {
     return (
      
         <LineChart
-          width={500}
-          height={300}
+          width={700}
+          height={500}
           data={data}
           margin={{
             top: 5,
