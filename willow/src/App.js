@@ -11,7 +11,7 @@ import {
 import Homepage from "./pages/Home";
 import InfoPage from "./pages/Information";
 import Tasks from "./pages/Tasks";
-
+import Assistant from "./pages/Assistant";
 
 import "react-dropzone-uploader/dist/styles.css";
 import "./App.css";
@@ -23,7 +23,9 @@ function UnconnectedApp() {
         {/* Path to each page components */}
         <Route exact path="/" component={withRouter(Homepage)} />
         <Route exact path="/info" component={withRouter(InfoPage)} />
+        <Route exact path="/assistant" component={withRouter(Assistant)} />
         <Route exact path="/tasks" component={withRouter(Tasks)} />
+        
         <Route
           exact
           path="/not-found"

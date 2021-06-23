@@ -3,6 +3,26 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 
 const data = [
   {
+    name: '2017',
+    you: 4000,
+    sp500: 2400,
+  },
+  {
+    name: '2018',
+    you: 4000,
+    sp500: 2400,
+  },
+  {
+    name: '2019',
+    you: 4000,
+    sp500: 2400,
+  },
+  {
+    name: '2020',
+    you: 4000,
+    sp500: 2400,
+  },
+  {
     name: '2021',
     you: 4000,
     sp500: 2400,
@@ -66,13 +86,13 @@ export default function StockGraph () {
     return (
      
         <LineChart
-          width={600}
+          width={700}
           height={550}
           data={data}
           margin={{
             top: 5,
             right: 30,
-            left: 20,
+            left: 25,
             bottom: 5,
           }}
         >
