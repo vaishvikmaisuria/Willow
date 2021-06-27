@@ -8,7 +8,7 @@ import Header from "../../components/Header";
 import "./Tasks.css";
 import useStyles from "../../assets/mainStyles";
 import TaskView from "../../components/TaskView";
-import AddTaskForm from "../../components/AddTaskForm";
+import AddStockForm from "../../components/AddStockForm";
 
 
 // Individual task items tags 
@@ -87,7 +87,7 @@ export function Tasks({ enqueueSnackbar }) {
 
           <Box w="49.5%" h={59} borderWidth="1.5px" borderRadius="lg" >
             {/* Add new Stock form */}
-            <AddTaskForm type="Stock"/>
+            <AddStockForm type="Stock"/>
         
           </Box>
         </Stack>

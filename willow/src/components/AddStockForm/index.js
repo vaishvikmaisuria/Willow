@@ -14,8 +14,10 @@ import {
 } from "@chakra-ui/react"
 import AddPortfolioForm from "../AddPortfolioForm";
 
-function AddTaskForm(prop) {
-    const [stage, setStage] = useState(1);
+function AddStockForm(prop) {
+    const [stockStage, setStockStage] = useState(1);
+    const [portfolioStage, setPortfolioStage] = useState(1);
+
     const { isOpen, onOpen, onClose } = useDisclosure();
     
     const closeModel = () => {
@@ -44,19 +46,19 @@ function AddTaskForm(prop) {
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Create your account</ModalHeader>
+                    <ModalHeader>Please fill all fields.</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         {prop.type === "Stock" ? 
                             <MasterForm
-                                stage={stage}
+                                stage={stockStage}
                                 setClose ={() => closeModel()}
-                                setStage={setStage}
+                                setStage={setStockStage}
                             /> : 
                             <AddPortfolioForm
-                                stage={stage}
+                                stage={portfolioStage}
                                 setClose ={() => closeModel()}
-                                setStage={setStage}
+                                setStage={setPortfolioStage}
                             />
                         }
                         
@@ -69,4 +71,4 @@ function AddTaskForm(prop) {
     )
 }
 
-export default AddTaskForm;
+export default AddStockForm;

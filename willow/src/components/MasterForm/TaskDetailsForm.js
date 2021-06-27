@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 import { withSnackbar } from "notistack";
-import { InputField } from "./InputField";
+import { InputField } from "../InputFieldForm";
 
 // Model of form according to information about the task 
 const firstStage = [

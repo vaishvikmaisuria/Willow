@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import useStyles from "../../assets/mainStyles";
 import StockGraph from "../../components/StockGraph";
 import AssetsGraph from "../../components/AssetsGraph";
-import AddTaskForm from "../../components/AddTaskForm";
+import AddStockForm from "../../components/AddStockForm";
 
 // landing page for the application 
 export function HomePage() {
@@ -15,7 +15,7 @@ export function HomePage() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
           <Center mt={2}>
-            <AddTaskForm type="Portfolio"/>
+            <AddStockForm type="Portfolio"/>
           </Center>
           <Center mt={3}>
             <StockGraph/>
