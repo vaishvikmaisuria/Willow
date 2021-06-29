@@ -69,11 +69,11 @@ const Header = () => {
             <ListItemText primary={"Price History"} />
           </ListItem>
 
-          <ListItem button component={RouterLink} to="/tasks">
+          <ListItem button component={RouterLink} to="/stocks">
             <ListItemIcon>
               <SmallAddIcon ml={1.5}/>
             </ListItemIcon>
-            <ListItemText primary={"Purchase Item"} />
+            <ListItemText primary={"Stock Info"} />
           </ListItem>
           
           <ListItem button component={RouterLink} to="/assistant">

@@ -10,11 +10,11 @@ import {
 } from "react-router-dom";
 import Homepage from "./pages/Home";
 import InfoPage from "./pages/Information";
-import Tasks from "./pages/Tasks";
 import Assistant from "./pages/Assistant";
 
 import "react-dropzone-uploader/dist/styles.css";
 import "./App.css";
+import StockInfo from "./pages/StockInfo";
 
 function UnconnectedApp() {
   return (
@@ -24,7 +24,7 @@ function UnconnectedApp() {
         <Route exact path="/" component={withRouter(Homepage)} />
         <Route exact path="/info" component={withRouter(InfoPage)} />
         <Route exact path="/assistant" component={withRouter(Assistant)} />
-        <Route exact path="/tasks" component={withRouter(Tasks)} />
+        <Route exact path="/stocks" component={withRouter(StockInfo)} />
         
         <Route
           exact

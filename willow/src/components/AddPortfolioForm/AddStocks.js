@@ -17,9 +17,11 @@ function StockInput({
   index,
   stock,
   handleNameChange,
-  handleNumChange,
+  handlePriceChange,
+  handleQtyChange,
   handleDelete,
 }) {
+
   return (
     <Flex
       display="flex"
@@ -51,7 +53,7 @@ function StockInput({
           value={parseInt(stock[2])}
           width="40%"
           onChange={(value) => {
-            handleNumChange(index, parseInt(value));
+            handleQtyChange(index, parseInt(value));
           }}
           key={`numinput-${index}`}
         >
@@ -62,8 +64,8 @@ function StockInput({
           </NumberInputStepper>
         </NumberInput>
       </Tooltip>
-      <Tooltip label="Price of Stock" fontSize="md"> 
-        <NumberInput
+      <Tooltip label="Price of Stock" fontSize="md">
+      <NumberInput
           m={2}
           min={0}
           name={`price_per_stock,${index}`}
@@ -71,7 +73,7 @@ function StockInput({
           value={parseInt(stock[1])}
           width="40%"
           onChange={(value) => {
-            handleNumChange(index, parseInt(value));
+            handlePriceChange(index, parseInt(value));
           }}
           key={`numinput-${index}`}
         >
@@ -80,7 +82,7 @@ function StockInput({
             <NumberIncrementStepper />
             <NumberDecrementStepper />
           </NumberInputStepper>
-        </NumberInput>
+        </NumberInput> 
       </Tooltip>
       <Button
         aria-label="Delete stock"
@@ -101,12 +103,14 @@ function AddStocks({ values, setFieldValue }) {
   let stock_names = values.symbol_per_stock;
   let price_per_stock = values.price_per_stock;
   let quantity_per_stock = values.quantity_per_stock;
-  console.log(stock_names)
+  
   const handleAddition = () => {
-    stock_names.push(`Q${stock_names.length + 1}`);
+    stock_names.push(`Stock ${stock_names.length + 1}`);
     price_per_stock.push(0);
+    quantity_per_stock.push(0);
     setFieldValue("stock_names", stock_names);
     setFieldValue("price_per_stock", price_per_stock);
+    setFieldValue("quantity_per_stock", quantity_per_stock);
   };
 
   const handleNameChange = (index, value) => {
@@ -116,7 +120,14 @@ function AddStocks({ values, setFieldValue }) {
     }
   };
 
-  const handleNumChange = (index, value) => {
+  const handleQtyChange  = (index, value) => {
+    if (index >= 0 && index < quantity_per_stock.length) {
+      quantity_per_stock[index] = value;
+      setFieldValue("quantity_per_stock", quantity_per_stock);
+    }
+  };
+
+  const handlePriceChange = (index, value) => {
     if (index >= 0 && index < price_per_stock.length) {
       price_per_stock[index] = value;
       setFieldValue("price_per_stock", price_per_stock);
@@ -135,12 +146,12 @@ function AddStocks({ values, setFieldValue }) {
   let i = 0;
   let stocks = [];
   for (i = 0; i < stock_names.length; i++) {
-    stocks.push([stock_names[i], price_per_stock[i]]);
+    stocks.push([stock_names[i], price_per_stock[i], quantity_per_stock[i]]);
   }
-
+  
   return (
     <>
-        <Button mb={5} onClick={handleAddition} >
+        <Button mt={2} onClick={handleAddition} >
           Add Stock
         </Button>
         {stocks.length > 0 &&
@@ -151,7 +162,8 @@ function AddStocks({ values, setFieldValue }) {
                 index={index}
                 stock={stock}
                 handleNameChange={handleNameChange}
-                handleNumChange={handleNumChange}
+                handlePriceChange={handlePriceChange}
+                handleQtyChange={handleQtyChange}
                 handleDelete={handleDelete}
               />
             );

@@ -18,7 +18,13 @@ import { saveAs } from "file-saver";
 const ERROR_MSGS = {
     nameMissing: "Name is required",
     fileMissing: "file upload is required",
-    pricePerStockMissing: "Price per stock is required",
+    yearlyContributionAmountMissing: "Yearly contribution amount is required",
+    dividendReinvestmentMissing: "Dividend reinvestment is required",
+    symbolPerStockMissing: "Symbol per stock array is required ",
+    pricePerStockMissing: "Price per stock array is required",
+    quantityPerStockMissing: "Quantity per stock array is required",
+    namePerAssetMissing: "name per asset array is required",
+    valuePerAssetMissing: "value_per_asset array is required",
 };
 
 // Scheme of the connector
@@ -31,9 +37,11 @@ const StageOneSchema = Yup.object().shape({
 export const StageTwoSchema = Yup.object().shape({
     name: Yup.string().min(1).required(ERROR_MSGS.nameMissing), // STAGE 2
     key: Yup.string().min(1).required(ERROR_MSGS.fileMissing),
+    yearly_contribution_amount: Yup.number().min(0).required(ERROR_MSGS.yearlyContributionAmountMissing),
+    dividend_reinvestment: Yup.string().required(ERROR_MSGS.dividendReinvestmentMissing),
     symbol_per_stock: Yup.array()
       .of(Yup.string())
-      .required(ERROR_MSGS.questionNamesMissing),
+      .required(ERROR_MSGS.symbolPerStockMissing),
     price_per_stock: Yup.array()
       .of(Yup.number().min(1))
       .min(1)
@@ -41,21 +49,20 @@ export const StageTwoSchema = Yup.object().shape({
     quantity_per_stock: Yup.array()
       .of(Yup.number().min(1))
       .min(1)
-      .required(ERROR_MSGS.pricePerStockMissing),
+      .required(ERROR_MSGS.quantityPerStockMissing),
     name_per_asset: Yup.array()
       .of(Yup.string())
-      .required(ERROR_MSGS.questionNamesMissing),
+      .required(ERROR_MSGS.namePerAssetMissing),
     value_per_asset: Yup.array()
       .of(Yup.number().min(1))
       .min(1)
-      .required(ERROR_MSGS.pricePerStockMissing),
+      .required(ERROR_MSGS.valuePerAssetMissing),
 });
 
-const CreateTaskSchema = StageOneSchema.concat(StageTwoSchema);
+const CreatePortfolioSchema = StageOneSchema.concat(StageTwoSchema);
 
 // Check input of stage two of add task form using StageTwoSchema
 function validateStageOne(values) {
-    console.log(values)
     try {
         StageOneSchema.validateSync({
             name: values.name,
@@ -69,19 +76,21 @@ function validateStageOne(values) {
 
 // Check input of stage two of add task form using StageTwoSchema
 function validateStageTwo(values) {
-    console.log(values)
     try {
       StageTwoSchema.validateSync({
         name: values.name,
         key: values.key,
+        yearly_contribution_amount: values.yearly_contribution_amount,
+        dividend_reinvestment: values.dividend_reinvestment,
         symbol_per_stock: values.symbol_per_stock,
         price_per_stock: values.price_per_stock,
         quantity_per_stock: values.quantity_per_stock,
-        name_per_asset: values.question_names,
-        value_per_asset: values.submission_file_name,
+        name_per_asset: values.name_per_asset,
+        value_per_asset: values.value_per_asset,
       });
       return false;
     } catch (e) {
+      console.log(e)
       return true;
     }
   }
@@ -92,12 +101,13 @@ export function MasterForm({
     setClose,
     resetForm,
     setFieldValue,
+    setPortfolioStage,
     setStage,
     setValues,
     stage,
     values,
 }) {
-    const [fileState, setFileState] = useState(false);
+    const [fileState, setFileState] = useState(true);
     const saveBtn = (
         <Button
           m={3}
@@ -119,7 +129,10 @@ export function MasterForm({
         </Button>
     );
     const closeModel = () => {
-        setClose();
+        setClose(values);
+        setFileState(true);
+        setStage(1);
+        // setPortfolioStage(values);
     }
 
     return (
@@ -170,6 +183,8 @@ export const EnhancedMasterForm = withFormik({
     mapPropsToValues: (props) => ({
         name: "",
         key: "",
+        yearly_contribution_amount: 0,
+        dividend_reinvestment: "yes",
         symbol_per_stock: [],
         price_per_stock: [],
         quantity_per_stock: [],
@@ -177,14 +192,16 @@ export const EnhancedMasterForm = withFormik({
         value_per_asset:[],
     }),
     handleSubmit: async (values, { setSubmitting }) => {  
-        try{
-            console.log(values)
-        } catch (e){
-            console.log(e)
-        }
+      // setPortfolioStage(values);
+      console.log("Got here without error")
+      try{
+          // console.log(values)
+      } catch (e){
+          console.log(e)
+      }
        
     },
-    validationSchema: () => CreateTaskSchema,
+    validationSchema: () => CreatePortfolioSchema,
     validateOnBlur: false,
     validateOnChange: false,
 })(MasterForm);

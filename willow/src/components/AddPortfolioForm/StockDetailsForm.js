@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { withSnackbar } from "notistack";
 import AddStocks from "./AddStocks";
+import AddAssets from "./AddAssets";
 import { formatFieldToTitle } from "../../helpers";
 
 // Model of form according to information about the task 
@@ -25,19 +26,20 @@ const firstStage = [
   {
     name: "name",
     type: "string",
+    title:"Portfolio Name",
     info: "",
     placeholder: "Jarvis Portfolio",
     required: true,
   },
   {
-    name: "yearlyInvestAmount",
+    name: "yearly_contribution_amount",
     type: "number",
     info: "",
     placeholder: "Jarvis Portfolio",
     required: true,
   },
   {
-    name: "drip",
+    name: "dividend_reinvestment",
     type: "radio",
     placeholder: "yes",
     info: "",
@@ -113,11 +115,7 @@ function InputField({
         aria-label={name}
         name={name}
         placeholder={placeholder}
-        value={
-          values.extra_fields
-            ? values.extra_fields[name]
-            : values[name]
-        }
+        value={values[name]}
         onChange={(e) => handleChange(e, name, "string")}
       />
     );
@@ -137,7 +135,8 @@ function InputField({
   );
 }
 
-function TaskDetailsForm({
+function StockDetailsForm({
+  assets,
   stocks,
   saveBtn,
   setFieldValue,
@@ -152,8 +151,12 @@ function TaskDetailsForm({
 
   function handleChange(e, name, type) {
     let value;
-    if (type === "number") value = e;
-    else value = e.target.value;
+ 
+    if (type === "number" || type === "string") {
+      value = e;
+    } else {
+      value = e.target.value;
+    }
     setFieldValue(name, value);
   
   }
@@ -184,23 +187,11 @@ function TaskDetailsForm({
           values={values}
           setFieldValue={setFieldValue}
         />
-      {/* <Box d="flex" justifyContent="left" m={2}>
-        <p>{info}</p>
-      </Box> */}
-      {/* {extraFields &&
-        Object.entries(extraFields).map((obj, index) => {
-          return (
-            <InputField
-              key={index}
-              name={obj[0]}
-              field={obj[1]}
-              index={index}
-              isExtraField={true}
-              values={values}
-              handleChange={handleChange}
-            />
-          );
-        })} */}
+        <AddAssets
+          assets={assets}
+          values={values}
+          setFieldValue={setFieldValue}
+        />
         <Box mt={5}>
           <Button
               disabled={validate()}
@@ -217,4 +208,4 @@ function TaskDetailsForm({
   );
 }
 
-export default withSnackbar(TaskDetailsForm);
+export default withSnackbar(StockDetailsForm);

@@ -82,7 +82,7 @@ function FileUploadForm({
                 try {
                   const obj = JSON.parse(e.target.result);
                   setValues(obj);
-                  setFileState(true);
+                  setFileState(false);
                 } catch (e) {
                   resetForm();
                   enqueueSnackbar("Provided file is incorrectly formatted", {

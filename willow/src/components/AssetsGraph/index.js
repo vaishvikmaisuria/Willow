@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { PieChart, Pie, Sector } from "recharts";
 
-const data = [
-  { name: "Stocks", value: 80000 },
-  { name: "Property", value: 60000 },
-  { name: "Crypto", value: 100000 },
-  { name: "Other", value: 1000 }
-];
+// const data = [
+//   { name: "Stocks", value: 80000 },
+//   { name: "Property", value: 60000 },
+//   { name: "Crypto", value: 100000 },
+//   { name: "Other", value: 1000 }
+// ];
+
+let data = [{ name: "Other", value: 1000 }]
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -81,7 +83,7 @@ const renderActiveShape = (props) => {
   );
 };
 
-export default function AssetsGraph () {
+export default function AssetsGraph ({assetData}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
     (_, index) => {
@@ -89,6 +91,15 @@ export default function AssetsGraph () {
     },
     [setActiveIndex]
   );
+
+  let name_per_asset = assetData.name_per_asset;
+  let price_per_stock = assetData.price_per_stock;
+
+  for (let i = 0; i < name_per_asset.length; i++) {
+    data.push({ "name": name_per_asset[i], "value": price_per_stock[i] });
+  }
+  
+  
   return (
     <PieChart width={650} height={550}>
       <Pie
