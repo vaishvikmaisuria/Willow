@@ -92,14 +92,14 @@ export default function AssetsGraph ({assetData}) {
     [setActiveIndex]
   );
 
-  let name_per_asset = assetData.name_per_asset;
-  let price_per_stock = assetData.price_per_stock;
+  let contains 
 
-  for (let i = 0; i < name_per_asset.length; i++) {
-    data.push({ "name": name_per_asset[i], "value": price_per_stock[i] });
+  for (let i = 0; i < assetData.name_per_asset.length; i++) {
+    data.push({ "name": assetData.name_per_asset[i], "value": assetData.price_per_stock[i] });
+    
   }
-  
-  
+  let contains = assetData;
+
   return (
     <PieChart width={650} height={550}>
       <Pie
