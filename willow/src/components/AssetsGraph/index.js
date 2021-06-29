@@ -9,7 +9,7 @@ import { PieChart, Pie, Sector } from "recharts";
 // ];
 
 let data = [{ name: "Other", value: 1000 }]
-
+let contains = {}
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -92,10 +92,23 @@ export default function AssetsGraph ({assetData}) {
     [setActiveIndex]
   );
 
-  let contains 
+  let i = 0;
+
+  const removeOldValue = ( name_of_asset ) => {
+    
+  }
+
+  while (i < assetData.name_per_asset.length) {
+    if (contains[assetData.name_per_asset[i]] !== assetData.price_per_stock[i]){
+
+      data.push({ "name": assetData.name_per_asset[i], "value": assetData.price_per_stock[i] });
+    }
+    
+    i++;
+  }
 
   for (let i = 0; i < assetData.name_per_asset.length; i++) {
-    data.push({ "name": assetData.name_per_asset[i], "value": assetData.price_per_stock[i] });
+    
     
   }
   let contains = assetData;
