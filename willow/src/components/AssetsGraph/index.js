@@ -1,15 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { PieChart, Pie, Sector } from "recharts";
 
-// const data = [
-//   { name: "Stocks", value: 80000 },
-//   { name: "Property", value: 60000 },
-//   { name: "Crypto", value: 100000 },
-//   { name: "Other", value: 1000 }
-// ];
 
-let data = [{ name: "Other", value: 1000 }]
-let contains = {}
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -83,7 +75,37 @@ const renderActiveShape = (props) => {
   );
 };
 
-export default function AssetsGraph ({assetData}) {
+const useCompare = val => {
+  // console.log(`val=${val}`);
+  const prevVal = usePrevious(val);
+  // console.log(`prevVal=${prevVal}`);
+  return prevVal !== val;
+};
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+const AssetsGraph = ( {assetData})  => {
+  const [finalData, setFinalData] = useState([{ name: "Other", value: 1 }]);
+  const hasAssetDataChanged = useCompare(assetData);
+
+  useEffect(() => {
+    if (hasAssetDataChanged && assetData.name_per_asset) {
+      setFinalData([])
+      let data = []
+      for (var i = 0; i < assetData.name_per_asset.length; i++) {   
+        data.push({ "name": assetData.name_per_asset[i], "value": assetData.value_per_asset[i] });
+      }
+      setFinalData(data)
+    }
+    
+  }, [hasAssetDataChanged, assetData.name_per_asset, assetData.value_per_asset]);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
     (_, index) => {
@@ -92,41 +114,23 @@ export default function AssetsGraph ({assetData}) {
     [setActiveIndex]
   );
 
-  let i = 0;
-
-  const removeOldValue = ( name_of_asset ) => {
-    
-  }
-
-  while (i < assetData.name_per_asset.length) {
-    if (contains[assetData.name_per_asset[i]] !== assetData.price_per_stock[i]){
-
-      data.push({ "name": assetData.name_per_asset[i], "value": assetData.price_per_stock[i] });
-    }
-    
-    i++;
-  }
-
-  for (let i = 0; i < assetData.name_per_asset.length; i++) {
-    
-    
-  }
-  let contains = assetData;
-
+  console.log(finalData)
   return (
     <PieChart width={650} height={550}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={data}
+        data={finalData}
         cx={325}
         cy={250}
         innerRadius={120}
         outerRadius={180}
         fill="#8884d8"
-        dataKey="value"
+        dataKey="value"ß
         onMouseEnter={onPieEnter}
       />
     </PieChart>
   );
 }
+
+export default AssetsGraph
