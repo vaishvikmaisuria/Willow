@@ -114,7 +114,6 @@ const AssetsGraph = ( {assetData})  => {
     [setActiveIndex]
   );
 
-  console.log(finalData)
   return (
     <PieChart width={650} height={550}>
       <Pie

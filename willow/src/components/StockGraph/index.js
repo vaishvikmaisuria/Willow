@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const data = [
@@ -26,76 +26,76 @@ const data = [
     sp500: 3225.52,
     inflation: 0,
   },
-  {
-    name: '2021',
-    you: 4000,
-    sp500: 3714.24,
-    inflation: 4000,
-  },
-  {
-    name: '2022',
-    you: 4000,
-    sp500: 4085.66,
-    inflation: 4140,
-  },
-  {
-    name: '2023',
-    you: 4000,
-    sp500: 4494.23,
-    inflation: 4284.9,
-  },
-  {
-    name: '2024',
-    you: 4000,
-    sp500: 4943.65,
-    inflation: 4434.8715,
-  },
-  {
-    name: '2025',
-    you: 4000,
-    sp500: 5438.01,
-    inflation: 4590.092003,
-  },
-  {
-    name: '2026',
-    you: 4000,
-    sp500: 5981.81,
-    inflation: 4750.745223,
-  },
-  {
-    name: '2027',
-    you: 4000,
-    sp500: 6579.99,
-    inflation: 4917.021305,
-  },
-  {
-    name: '2028',
-    you: 4000,
-    sp500: 7237.99,
-    inflation: 5089.117051,
-  },
-  {
-    name: '2029',
-    you: 4000,
-    sp500: 7961.78,
-    inflation: 5267.236148,
-  },
-  {
-    name: '2030',
-    you: 4000,
-    sp500: 8757.95,
-    inflation: 5451.589413,
-  }
 ];
 
-export default function StockGraph () {
+const useCompare = val => {
+  // console.log(`val=${val}`);
+  const prevVal = usePrevious(val);
+  // console.log(`prevVal=${prevVal}`);
+  return prevVal !== val;
+};
 
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+export default function StockGraph ({stockData}) {
+    // console.log(stockData)
+    const [finalData, setFinalData] = useState(data);
+    const hasAssetDataChanged = useCompare(stockData);
+
+    const calculateTotal = (data) => {
+      let name_per_stock = data.stock_names;
+      let price_per_stock = data.price_per_stock;
+      let quantity_per_stock = data.quantity_per_stock;
+      let total = 0;
+      for (var i = 0; i < name_per_stock.length; i++) {  
+        total = total + (price_per_stock[i] * quantity_per_stock[i]);
+      }
+      return total;
+    }
+
+    const calculateData = (data, total) => {
+      let tempData =  [{
+        name: '2021',
+        you: total,
+        sp500: total,
+        inflation: total,
+      }]
+      let tempSP500 = total;
+      let tempInflation = total;
+      for (var i = 22; i < 31; i++) {
+        tempSP500 = tempSP500 * 1.10;
+        tempInflation = tempInflation * 1.035;
+        tempData.push({
+          name: ('20' + i),
+          you: total,
+          sp500: tempSP500,
+          inflation: tempInflation,
+        })
+      }
+      return tempData
+    }
+   
+    useEffect(() => {
+      if (hasAssetDataChanged && stockData.stock_names) {
+        let total = calculateTotal(stockData);
+        let data = calculateData(stockData, total)
+        setFinalData(finalData.concat(data))
+      }
+    }, [hasAssetDataChanged, finalData, setFinalData,  stockData, stockData.stock_names]);
+
+  
     return (
      
         <LineChart
           width={700}
           height={550}
-          data={data}
+          data={finalData}
           margin={{
             top: 5,
             right: 30,
