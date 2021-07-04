@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge, Box, Heading, Stack } from "@chakra-ui/react";
 import { withSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 import { useAsync } from "react-use";
 import { fetchDividend } from "../../requests/stocks";
 import Header from "../../components/Header";
-import "./Tasks.css";
+import "./StockInfo.css";
 import useStyles from "../../assets/mainStyles";
 import TaskView from "../../components/TaskView";
-import AddTaskForm from "../../components/AddTaskForm";
+import AddStockForm from "../../components/AddStockForm";
 
 
 // Individual task items tags 
@@ -28,11 +28,8 @@ export function TaskItem({ task }) {
     }
   };
 
-  let new_Path = "/tasks/";
-  if (task.tid || task.tid === 0) {
-    new_Path = "/tasks/" + task.tid + "/";
-  }
-
+  let new_Path = "/stocks/";
+ 
   return (
     <Link to={new_Path}>
       <Box p={5} mb={4} shadow="md" borderWidth="1px">
@@ -44,8 +41,8 @@ export function TaskItem({ task }) {
     </Link>
   );
 }
-// get all the task 
-export function Tasks({ enqueueSnackbar }) {
+// get all the Stocks and their info 
+export function StockInfo({ enqueueSnackbar }) {
   const tasks = useAsync(fetchDividend, []);
   useEffect(() => {
     if (tasks.error) {
@@ -54,6 +51,8 @@ export function Tasks({ enqueueSnackbar }) {
     }
   }, [tasks, enqueueSnackbar]);
   
+  const [stockData, setStockData] = useState({});
+
   let moneyInvested = 1000;
   let totalDividendM = 0;
   let totalDividendY = 0;
@@ -87,14 +86,14 @@ export function Tasks({ enqueueSnackbar }) {
 
           <Box w="49.5%" h={59} borderWidth="1.5px" borderRadius="lg" >
             {/* Add new Stock form */}
-            <AddTaskForm type="Stock"/>
+            <AddStockForm type="Stock" setStockData={setStockData} />
         
           </Box>
         </Stack>
         <Stack ml={20}>
           <Box w="100%" mt={5} borderWidth="1.5px" borderRadius="lg" overflow="hidden">
-            {/* Information about the Automated system */}
-            <TaskView />
+            {/* Information about the Stocks */}
+            <TaskView stockData={stockData} />
 
           </Box>
         </Stack>
@@ -103,4 +102,4 @@ export function Tasks({ enqueueSnackbar }) {
   );
 }
 
-export default withSnackbar(Tasks);
+export default withSnackbar(StockInfo);

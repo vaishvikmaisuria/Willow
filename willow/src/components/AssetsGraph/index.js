@@ -1,12 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { PieChart, Pie, Sector } from "recharts";
 
-const data = [
-  { name: "Stocks", value: 80000 },
-  { name: "Property", value: 60000 },
-  { name: "Crypto", value: 100000 },
-  { name: "Other", value: 1000 }
-];
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -81,7 +75,37 @@ const renderActiveShape = (props) => {
   );
 };
 
-export default function AssetsGraph () {
+const useCompare = val => {
+  // console.log(`val=${val}`);
+  const prevVal = usePrevious(val);
+  // console.log(`prevVal=${prevVal}`);
+  return prevVal !== val;
+};
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+const AssetsGraph = ( {assetData})  => {
+  const [finalData, setFinalData] = useState([{ name: "Other", value: 1 }]);
+  const hasAssetDataChanged = useCompare(assetData);
+
+  useEffect(() => {
+    if (hasAssetDataChanged && assetData.name_per_asset) {
+      setFinalData([])
+      let data = []
+      for (var i = 0; i < assetData.name_per_asset.length; i++) {   
+        data.push({ "name": assetData.name_per_asset[i], "value": assetData.value_per_asset[i] });
+      }
+      setFinalData(data)
+    }
+    
+  }, [hasAssetDataChanged, assetData.name_per_asset, assetData.value_per_asset]);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
     (_, index) => {
@@ -89,20 +113,23 @@ export default function AssetsGraph () {
     },
     [setActiveIndex]
   );
+
   return (
     <PieChart width={650} height={550}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={data}
+        data={finalData}
         cx={325}
         cy={250}
         innerRadius={120}
         outerRadius={180}
         fill="#8884d8"
-        dataKey="value"
+        dataKey="value"ß
         onMouseEnter={onPieEnter}
       />
     </PieChart>
   );
 }
+
+export default AssetsGraph

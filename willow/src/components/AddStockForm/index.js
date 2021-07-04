@@ -14,15 +14,19 @@ import {
 } from "@chakra-ui/react"
 import AddPortfolioForm from "../AddPortfolioForm";
 
-function AddTaskForm(prop) {
-    const [stage, setStage] = useState(1);
+function AddStockForm({type, setStockData, setPortfolioData}) {
+    const [stockStage, setStockStage] = useState(1);
+    const [portfolioStage, setPortfolioStage] = useState(1);
+
     const { isOpen, onOpen, onClose } = useDisclosure();
     
-    const closeModel = () => {
+    const closeModel = (values) => {
         onClose();
+        setPortfolioData(values)
     }
+
     let buttonText = "Add Stock";
-    if (prop.type === "Portfolio") {
+    if (type === "Portfolio") {
         buttonText = "Add Portfolio"   
     }
   
@@ -44,19 +48,21 @@ function AddTaskForm(prop) {
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Create your account</ModalHeader>
+                    <ModalHeader>Please fill all fields.</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        {prop.type === "Stock" ? 
+                        {type === "Stock" ? 
                             <MasterForm
-                                stage={stage}
+                                stage={stockStage}
+                                setStockData={setStockData}
                                 setClose ={() => closeModel()}
-                                setStage={setStage}
+                                setStage={setStockStage}
                             /> : 
                             <AddPortfolioForm
-                                stage={stage}
-                                setClose ={() => closeModel()}
-                                setStage={setStage}
+                                stage={portfolioStage}
+                                setPortfolioData={setPortfolioData}
+                                setClose ={(values) => closeModel(values)}
+                                setStage={setPortfolioStage}
                             />
                         }
                         
@@ -69,4 +75,4 @@ function AddTaskForm(prop) {
     )
 }
 
-export default AddTaskForm;
+export default AddStockForm;

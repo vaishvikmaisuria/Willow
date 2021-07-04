@@ -1,17 +1,15 @@
 import React from "react";
 import {
-    Button,
     Tabs,
     TabList,
     TabPanels,
     Tab,
     TabPanel,
 } from "@chakra-ui/react";
-import { saveAs } from "file-saver";
 import { withFormik } from "formik";
 import { withSnackbar } from "notistack";
 import * as Yup from "yup";
-import TaskDetailsForm from "./TaskDetailsForm";
+import SingleStockForm from "./SingleStockForm";
 import { addStock } from "../../requests/stocks";
 
 // Error message for fields in the form 
@@ -29,7 +27,7 @@ const StageOneSchema = Yup.object().shape({
 });
 
 
-const CreateTaskSchema = StageOneSchema;
+const CreateStockSchema = StageOneSchema;
 
 // Check input of stage two of add task form using StageTwoSchema
 function validateStageOne(values) {
@@ -61,26 +59,7 @@ export function MasterForm({
         setClose();
     }
 
-    const saveBtn = (
-        <Button
-            m={3}
-            style={{ float: "right" }}
-            variant="outline"
-            onClick={() => {
-                let { files, ...valuesObj } = values;
-                var file = new File(
-                    [JSON.stringify(valuesObj)],
-                    `task_${new Date()}.json`,
-                    {
-                        type: "text/plain;charset=utf-8",
-                    }
-                );
-                saveAs(file);
-            }}
-        >
-            Save
-        </Button>
-    );
+    
     
     return (
         <Tabs
@@ -96,8 +75,7 @@ export function MasterForm({
 
             <TabPanels>
                 <TabPanel>
-                    <TaskDetailsForm
-                        saveBtn={saveBtn}
+                    <SingleStockForm
                         setFieldValue={setFieldValue}
                         handleSubmit={handleSubmit}
                         setClose={() => closeModel()}
@@ -130,7 +108,7 @@ export const EnhancedMasterForm = withFormik({
         }
        
     },
-    validationSchema: () => CreateTaskSchema,
+    validationSchema: () => CreateStockSchema,
     validateOnBlur: false,
     validateOnChange: false,
 })(MasterForm);
