@@ -11,6 +11,7 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { addStock } from "../../requests/stocks";
 
 // Single row of Stock input containing stock name and quantity,price and delete symbol 
 function StockInput({
@@ -100,7 +101,7 @@ function StockInput({
 // Add Stock mechanism for stage 2 of add task form -> to configure number of stocks
 function AddStocks({ values, setFieldValue }) {
   
-  let stock_names = values.symbol_per_stock;
+  let stock_names = values.symbol_per_stock ;
   let price_per_stock = values.price_per_stock;
   let quantity_per_stock = values.quantity_per_stock;
   
@@ -145,9 +146,14 @@ function AddStocks({ values, setFieldValue }) {
 
   let i = 0;
   let stocks = [];
-  for (i = 0; i < stock_names.length; i++) {
-    stocks.push([stock_names[i], price_per_stock[i], quantity_per_stock[i]]);
+  console.log()
+  if ( stock_names.length > 0 ){
+    for (i = 0; i < stock_names.length; i++) {
+      stocks.push([stock_names[i], price_per_stock[i], quantity_per_stock[i]]);
+    }
   }
+
+  
   
   return (
     <>

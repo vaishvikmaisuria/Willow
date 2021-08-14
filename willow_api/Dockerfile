@@ -1,4 +1,3 @@
-
 FROM golang:latest AS builder
 
 # Set necessary environmet variables needed for our image

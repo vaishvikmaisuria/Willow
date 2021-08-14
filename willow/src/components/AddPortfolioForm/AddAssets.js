@@ -79,8 +79,8 @@ function AssetsInput({
 // Add Stock mechanism for stage 2 of add task form -> to configure number of Assets
 function AddAssets({ values, setFieldValue }) {
   
-  let asset_names = values.name_per_asset;
-  let value_per_asset = values.value_per_asset;
+  let asset_names = values.name_per_asset || [];
+  let value_per_asset = values.value_per_asset || [];
   
   const handleAddition = () => {
     asset_names.push(`Asset ${asset_names.length + 1}`);
