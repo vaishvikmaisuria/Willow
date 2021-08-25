@@ -39,7 +39,7 @@ export const StageTwoSchema = Yup.object().shape({
     key: Yup.string().min(1).required(ERROR_MSGS.fileMissing),
     yearly_contribution_amount: Yup.number().min(0).required(ERROR_MSGS.yearlyContributionAmountMissing),
     dividend_reinvestment: Yup.string().required(ERROR_MSGS.dividendReinvestmentMissing),
-    symbol_per_stock: Yup.array()
+    stock_names: Yup.array()
       .of(Yup.string())
       .required(ERROR_MSGS.symbolPerStockMissing),
     price_per_stock: Yup.array()
@@ -82,7 +82,7 @@ function validateStageTwo(values) {
         key: values.key,
         yearly_contribution_amount: values.yearly_contribution_amount,
         dividend_reinvestment: values.dividend_reinvestment,
-        symbol_per_stock: values.symbol_per_stock,
+        stock_names: values.stock_names,
         price_per_stock: values.price_per_stock,
         quantity_per_stock: values.quantity_per_stock,
         name_per_asset: values.name_per_asset,
@@ -185,7 +185,7 @@ export const EnhancedMasterForm = withFormik({
         key: "",
         yearly_contribution_amount: 0,
         dividend_reinvestment: "yes",
-        symbol_per_stock: [],
+        stock_names: [],
         price_per_stock: [],
         quantity_per_stock: [],
         name_per_asset: [],
@@ -193,7 +193,7 @@ export const EnhancedMasterForm = withFormik({
     }),
     handleSubmit: async (values, { setSubmitting }) => {  
       // setPortfolioStage(values);
-      console.log("Got here without error")
+      // console.log("Got here without error")
       try{
           // console.log(values)
       } catch (e){

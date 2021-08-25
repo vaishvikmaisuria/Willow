@@ -1,41 +1,43 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react"
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons"
 import { useTable, useSortBy } from "react-table"
 import { withSnackbar } from "notistack";
 
-function TaskView({ fieldName, fieldValue }) {
+function TaskView(props) {
+  let {stockData} = props
+  let rowData = []
+  let stockName = stockData.stock_names;
+  useEffect(()=> {
+    stockName.forEach(function (value, i) {
+      let stock = {
+        "Stock": value,
+        "QuantityValue": stockData.quantity_per_stock[i],
+        "BoughtValue": stockData.price_per_stock[i],
+        "CurrentPrice": stockData.price_per_stock[i],
+        "DividendValue": "Unknown",
+      }
+      rowData.push(stock)
+    });
+  
+  }, [stockData]);
+
+  if (stockName) {
+    stockName.forEach(function (value, i) {
+      let stock = {
+        "Stock": value,
+        "QuantityValue": stockData.quantity_per_stock[i],
+        "BoughtValue": stockData.price_per_stock[i],
+        "CurrentPrice": stockData.price_per_stock[i],
+        "DividendValue": "Unknown",
+      }
+      rowData.push(stock)
+    });
+    
+  }
+  
   const data = React.useMemo(
-    () => [
-      {
-        Stock: "APPL",
-        QuantityValue: "100",
-        PriceValue: "68",
-        CurrentPrice: "130",
-        DividendValue: "10",
-      },
-      {
-        Stock: "BCE",
-        QuantityValue: "100",
-        PriceValue: "65",
-        CurrentPrice: "55",
-        DividendValue: "10",
-      },
-      {
-        Stock: "ENB",
-        QuantityValue: "100",
-        PriceValue: "35",
-        CurrentPrice: "45",
-        DividendValue: "10",
-      },
-      {
-        Stock: "TD",
-        QuantityValue: "50",
-        PriceValue: "55",
-        CurrentPrice: "78",
-        DividendValue: "10",
-      },
-    ],
+    () => rowData,
     [],
   )
 
@@ -51,7 +53,7 @@ function TaskView({ fieldName, fieldValue }) {
       },
       {
         Header: "Bought Price",
-        accessor: "PriceValue",
+        accessor: "BoughtValue",
       },
       {
         Header: "Current Price",

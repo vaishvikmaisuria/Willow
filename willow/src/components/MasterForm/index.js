@@ -56,11 +56,9 @@ export function MasterForm({
 }) {
 
     const closeModel = () => {
-        setClose();
+        setClose(values);
     }
 
-    
-    
     return (
         <Tabs
             isFitted

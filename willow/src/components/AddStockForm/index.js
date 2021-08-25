@@ -14,15 +14,23 @@ import {
 } from "@chakra-ui/react"
 import AddPortfolioForm from "../AddPortfolioForm";
 
+
 function AddStockForm({type, setStockData, setPortfolioData}) {
     const [stockStage, setStockStage] = useState(1);
     const [portfolioStage, setPortfolioStage] = useState(1);
+    
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     
     const closeModel = (values) => {
         onClose();
-        setPortfolioData(values)
+        if (type === "Portfolio") {
+            setPortfolioData(values)
+        } else {
+            setStockData(values)
+            
+        }
+        
     }
 
     let buttonText = "Add Stock";
@@ -55,7 +63,7 @@ function AddStockForm({type, setStockData, setPortfolioData}) {
                             <MasterForm
                                 stage={stockStage}
                                 setStockData={setStockData}
-                                setClose ={() => closeModel()}
+                                setClose ={(values) => closeModel(values)}
                                 setStage={setStockStage}
                             /> : 
                             <AddPortfolioForm

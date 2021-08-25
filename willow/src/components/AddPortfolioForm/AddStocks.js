@@ -101,7 +101,7 @@ function StockInput({
 // Add Stock mechanism for stage 2 of add task form -> to configure number of stocks
 function AddStocks({ values, setFieldValue }) {
   
-  let stock_names = values.symbol_per_stock ;
+  let stock_names = values.stock_names ;
   let price_per_stock = values.price_per_stock;
   let quantity_per_stock = values.quantity_per_stock;
   

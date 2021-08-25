@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Badge, Box, Heading, Stack } from "@chakra-ui/react";
 import { withSnackbar } from "notistack";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import "./StockInfo.css";
 import useStyles from "../../assets/mainStyles";
 import TaskView from "../../components/TaskView";
 import AddStockForm from "../../components/AddStockForm";
-
+import StocksContext from '../../store/stocks-context';
 
 // Individual task items tags 
 export function TaskItem({ task }) {
@@ -43,6 +43,11 @@ export function TaskItem({ task }) {
 }
 // get all the Stocks and their info 
 export function StockInfo({ enqueueSnackbar }) {
+
+  const stocksCtx = useContext(StocksContext);
+
+  // console.log(stocksCtx.stocks)
+
   const tasks = useAsync(fetchDividend, []);
   useEffect(() => {
     if (tasks.error) {
@@ -51,7 +56,7 @@ export function StockInfo({ enqueueSnackbar }) {
     }
   }, [tasks, enqueueSnackbar]);
   
-  const [stockData, setStockData] = useState({});
+  // const [stockData, setStockData] = useState({});
 
   let moneyInvested = 1000;
   let totalDividendM = 0;
@@ -59,9 +64,8 @@ export function StockInfo({ enqueueSnackbar }) {
   if (tasks.value !== 0){
     totalDividendY = tasks.value;
   }
- 
-
   const classes = useStyles();
+
   return (
     <div>
       <Header />
@@ -86,14 +90,14 @@ export function StockInfo({ enqueueSnackbar }) {
 
           <Box w="49.5%" h={59} borderWidth="1.5px" borderRadius="lg" >
             {/* Add new Stock form */}
-            <AddStockForm type="Stock" setStockData={setStockData} />
+            <AddStockForm type="Stock" setStockData={stocksCtx.addStock} />
         
           </Box>
         </Stack>
         <Stack ml={20}>
           <Box w="100%" mt={5} borderWidth="1.5px" borderRadius="lg" overflow="hidden">
             {/* Information about the Stocks */}
-            <TaskView stockData={stockData} />
+            <TaskView stockData={stocksCtx.stocks} />
 
           </Box>
         </Stack>
