@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import useStyles from "../../assets/mainStyles";
 import { withSnackbar } from "notistack";
 
-// landing page for the application 
+// landing page for the application
 export function Assistant() {
   const classes = useStyles();
   return (
@@ -12,11 +12,12 @@ export function Assistant() {
       <Header />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-          <Center mt={2}>
-            <Text>
-              This Page will contain information on the best type of stocks to pick
-            </Text>
-          </Center>
+        <Center mt={2}>
+          <Text>
+            This Page will contain information on the best type of stocks to
+            pick
+          </Text>
+        </Center>
       </main>
     </div>
   );

@@ -21,12 +21,12 @@ import AddStocks from "./AddStocks";
 import AddAssets from "./AddAssets";
 import { formatFieldToTitle } from "../../helpers";
 
-// Model of form according to information about the task 
+// Model of form according to information about the task
 const firstStage = [
   {
     name: "name",
     type: "string",
-    title:"Portfolio Name",
+    title: "Portfolio Name",
     info: "",
     placeholder: "Jarvis Portfolio",
     required: true,
@@ -57,14 +57,8 @@ const firstStage = [
   },
 ];
 
-// set the input fields for the form 
-function InputField({
-  name,
-  field,
-  index,
-  values,
-  handleChange,
-}) {
+// set the input fields for the form
+function InputField({ name, field, index, values, handleChange }) {
   const type = field.type;
   const placeholder = field.placeholder;
   const info = field.info;
@@ -75,7 +69,7 @@ function InputField({
       <NumberInput
         min={0}
         defaultValue={0}
-        value={ values[name]}
+        value={values[name]}
         onChange={(value) => handleChange(value, name, "number")}
       >
         <NumberInputField />
@@ -122,7 +116,7 @@ function InputField({
   }
 
   return (
-    <FormControl key={index}  htmlFor={name}>
+    <FormControl key={index} htmlFor={name}>
       <Box d="flex" justifyContent="left">
         <FormLabel htmlFor={name}>{formatFieldToTitle(name)}</FormLabel>
       </Box>
@@ -145,20 +139,18 @@ function StockDetailsForm({
   setClose,
   handleSubmit,
 }) {
-  
   // const info = connectorInfo.info;
   // const extraFields = connectorInfo.extra_fields;
 
   function handleChange(e, name, type) {
     let value;
- 
+
     if (type === "number" || type === "string") {
       value = e;
     } else {
       value = e.target.value;
     }
     setFieldValue(name, value);
-  
   }
 
   function handlebtnSubmit() {
@@ -181,25 +173,25 @@ function StockDetailsForm({
           />
         );
       })}
-        {/* add Question part of the form */}
-        <AddStocks
-          stocks={stocks}
-          values={values}
-          setFieldValue={setFieldValue}
-        />
-        <AddAssets
-          assets={assets}
-          values={values}
-          setFieldValue={setFieldValue}
-        />
-        <Box mt={5}>
-          <Button
-              disabled={validate()}
-              m={3}
-              style={{ float: "right" }}
-              variantcolor="blue"
-              onClick={()=> handlebtnSubmit()}
-          >
+      {/* add Question part of the form */}
+      <AddStocks
+        stocks={stocks}
+        values={values}
+        setFieldValue={setFieldValue}
+      />
+      <AddAssets
+        assets={assets}
+        values={values}
+        setFieldValue={setFieldValue}
+      />
+      <Box mt={5}>
+        <Button
+          disabled={validate()}
+          m={3}
+          style={{ float: "right" }}
+          variantcolor="blue"
+          onClick={() => handlebtnSubmit()}
+        >
           <Link to="/">Submit</Link>
         </Button>
         {saveBtn}

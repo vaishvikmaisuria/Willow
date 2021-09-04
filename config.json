@@ -1,11 +1,13 @@
 {
-    "name": "Jarvis",
-    "key": "vash",
-    "yearly_contribution_amount": 0,
-    "dividend_reinvestment": "no",
-    "symbol_per_stock": [],
-    "price_per_stock":[],
-    "quantity_per_stock": [],
-    "name_per_asset": [],
-    "value_per_asset": []
-}   
+  "name": "Jarvis",
+  "key": "vash",
+  "yearly_contribution_amount": 0,
+  "dividend_reinvestment": "no",
+  "symbol_per_stock": ["IBM", "APPL"],
+  "price_per_stock": [68, 65, 35, 55],
+  "quantity_per_stock": [100, 100, 100, 50],
+  "name_per_asset": ["Cash"],
+  "value_per_asset": [200],
+  "stock_names": ["APPL", "BCE", "ENB", "TD"],
+  "asset_names": ["Cash"]
+}

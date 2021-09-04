@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { ColorModeScript } from "@chakra-ui/react"
-import theme from "./theme"
-import { StockContextProvider } from './store/stocks-context';
+import { ColorModeScript } from "@chakra-ui/react";
+import theme from "./theme";
+import { StockContextProvider } from "./store/stocks-context";
 
 ReactDOM.render(
   <StockContextProvider>

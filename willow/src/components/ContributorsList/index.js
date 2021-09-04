@@ -28,7 +28,15 @@ const contributors = [
 // Component of all contributors
 const ContributorsList = () => {
   return (
-    <Stack p={5} shadow="md" borderWidth="1px" mt={12} mb={12} mr={12} textAlign="center">
+    <Stack
+      p={5}
+      shadow="md"
+      borderWidth="1px"
+      mt={12}
+      mb={12}
+      mr={12}
+      textAlign="center"
+    >
       <Heading as="h3" size="lg">
         Contributors
       </Heading>

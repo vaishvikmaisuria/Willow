@@ -1,3 +1,2 @@
 ignore:
-    - "output_tests/.*"
-
+  - "output_tests/.*"

@@ -1,6 +1,5 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import { PieChart, Pie, Sector } from "recharts";
-
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -15,7 +14,7 @@ const renderActiveShape = (props) => {
     fill,
     payload,
     percent,
-    value
+    value,
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -75,7 +74,7 @@ const renderActiveShape = (props) => {
   );
 };
 
-const useCompare = val => {
+const useCompare = (val) => {
   // console.log(`val=${val}`);
   const prevVal = usePrevious(val);
   // console.log(`prevVal=${prevVal}`);
@@ -90,21 +89,27 @@ function usePrevious(value) {
   return ref.current;
 }
 
-const AssetsGraph = ( {assetData})  => {
+const AssetsGraph = ({ assetData }) => {
   const [finalData, setFinalData] = useState([{ name: "Other", value: 1 }]);
   const hasAssetDataChanged = useCompare(assetData);
 
   useEffect(() => {
     if (hasAssetDataChanged && assetData.name_per_asset) {
-      setFinalData([])
-      let data = []
-      for (var i = 0; i < assetData.name_per_asset.length; i++) {   
-        data.push({ "name": assetData.name_per_asset[i], "value": assetData.value_per_asset[i] });
+      setFinalData([]);
+      let data = [];
+      for (var i = 0; i < assetData.name_per_asset.length; i++) {
+        data.push({
+          name: assetData.name_per_asset[i],
+          value: assetData.value_per_asset[i],
+        });
       }
-      setFinalData(data)
+      setFinalData(data);
     }
-    
-  }, [hasAssetDataChanged, assetData.name_per_asset, assetData.value_per_asset]);
+  }, [
+    hasAssetDataChanged,
+    assetData.name_per_asset,
+    assetData.value_per_asset,
+  ]);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
@@ -125,11 +130,12 @@ const AssetsGraph = ( {assetData})  => {
         innerRadius={120}
         outerRadius={180}
         fill="#8884d8"
-        dataKey="value"ß
+        dataKey="value"
+        ß
         onMouseEnter={onPieEnter}
       />
     </PieChart>
   );
-}
+};
 
-export default AssetsGraph
+export default AssetsGraph;

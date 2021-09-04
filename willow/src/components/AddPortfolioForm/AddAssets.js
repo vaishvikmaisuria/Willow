@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 
-// Single row of Stock input containing stock name and quantity,price and delete symbol 
+// Single row of Stock input containing stock name and quantity,price and delete symbol
 function AssetsInput({
   index,
   asset,
@@ -20,7 +20,6 @@ function AssetsInput({
   handleNumChange,
   handleDelete,
 }) {
-
   return (
     <Flex
       display="flex"
@@ -43,7 +42,7 @@ function AssetsInput({
         key={`input-${index}`}
         width="40%"
       />
-      <Tooltip label="Value of Asset" fontSize="md"> 
+      <Tooltip label="Value of Asset" fontSize="md">
         <NumberInput
           m={2}
           min={0}
@@ -78,10 +77,9 @@ function AssetsInput({
 
 // Add Stock mechanism for stage 2 of add task form -> to configure number of Assets
 function AddAssets({ values, setFieldValue }) {
-  
   let asset_names = values.name_per_asset || [];
   let value_per_asset = values.value_per_asset || [];
-  
+
   const handleAddition = () => {
     asset_names.push(`Asset ${asset_names.length + 1}`);
     value_per_asset.push(0);
@@ -91,24 +89,24 @@ function AddAssets({ values, setFieldValue }) {
 
   const handleNameChange = (index, value) => {
     if (index >= 0 && index < asset_names.length) {
-        asset_names[index] = value;
-        setFieldValue("asset_names", asset_names);
+      asset_names[index] = value;
+      setFieldValue("asset_names", asset_names);
     }
   };
 
   const handleNumChange = (index, value) => {
     if (index >= 0 && index < value_per_asset.length) {
-        value_per_asset[index] = value;
+      value_per_asset[index] = value;
       setFieldValue("value_per_asset", value_per_asset);
     }
   };
 
   const handleDelete = (index) => {
     if (index >= 0 && index < asset_names.length) {
-        asset_names.splice(index, 1);
-        value_per_asset.splice(index, 1);
-        setFieldValue("asset_names", asset_names);
-        setFieldValue("value_per_asset", value_per_asset);
+      asset_names.splice(index, 1);
+      value_per_asset.splice(index, 1);
+      setFieldValue("asset_names", asset_names);
+      setFieldValue("value_per_asset", value_per_asset);
     }
   };
 
@@ -117,26 +115,25 @@ function AddAssets({ values, setFieldValue }) {
   for (i = 0; i < asset_names.length; i++) {
     assets.push([asset_names[i], value_per_asset[i]]);
   }
-  
+
   return (
     <>
-        <Button mt={2} onClick={handleAddition} >
-          Add Assets
-        </Button>
-        {assets.length > 0 &&
-          assets.map((asset, index) => {
-            return (
-              <AssetsInput
-                key={index}
-                index={index}
-                asset={asset}
-                handleNameChange={handleNameChange}
-                handleNumChange={handleNumChange}
-                handleDelete={handleDelete}
-              />
-            );
-          })
-        }
+      <Button mt={2} onClick={handleAddition}>
+        Add Assets
+      </Button>
+      {assets.length > 0 &&
+        assets.map((asset, index) => {
+          return (
+            <AssetsInput
+              key={index}
+              index={index}
+              asset={asset}
+              handleNameChange={handleNameChange}
+              handleNumChange={handleNumChange}
+              handleDelete={handleDelete}
+            />
+          );
+        })}
     </>
   );
 }

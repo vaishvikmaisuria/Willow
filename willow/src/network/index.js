@@ -3,7 +3,7 @@ import axios from "axios";
 export const localUrl = "http://localhost";
 export const serverUrl = "http://localhost:5000";
 
-// Adds trailing slash if they do not exist 
+// Adds trailing slash if they do not exist
 const enforceTrailingSlash = (url) => {
   return url.endsWith("/") ? url : url + "/";
 };
@@ -18,4 +18,3 @@ export function getRequest(uri, searchParams) {
 export function postRequest(uri, data) {
   return axios.post(enforceTrailingSlash(`${serverUrl}${uri}`), data);
 }
-
