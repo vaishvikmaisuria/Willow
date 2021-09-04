@@ -21,7 +21,8 @@ const Instructions = () => {
           </ListItem>
           <ListItem>Click Add Item</ListItem>
           <ListItem>
-            Fill out the form for your stock and watch as your portfolio is updated with prices.
+            Fill out the form for your stock and watch as your portfolio is
+            updated with prices.
           </ListItem>
         </List>
       </Center>

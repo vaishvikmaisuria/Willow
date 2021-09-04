@@ -3,14 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { ColorModeScript } from "@chakra-ui/react"
-import theme from "./theme"
+import { ColorModeScript } from "@chakra-ui/react";
+import theme from "./theme";
+import { StockContextProvider } from "./store/stocks-context";
 
 ReactDOM.render(
-  <React.StrictMode>
-     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <App />
-  </React.StrictMode>,
+  <StockContextProvider>
+    <React.StrictMode>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <App />
+    </React.StrictMode>
+  </StockContextProvider>,
   document.getElementById("root")
 );
 

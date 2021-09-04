@@ -10,7 +10,7 @@ import {
 import { withSnackbar } from "notistack";
 import { InputField } from "../InputFieldForm";
 
-// Model of form according to information about the task 
+// Model of form according to information about the task
 const firstStage = [
   {
     name: "name",
@@ -19,10 +19,9 @@ const firstStage = [
     placeholder: "Jarvis Crypto",
     required: true,
   },
-  
 ];
 
-// First form for adding task containing option of connector, preloaded configuration, questions 
+// First form for adding task containing option of connector, preloaded configuration, questions
 function FileUploadForm({
   enqueueSnackbar,
   resetForm,
@@ -33,14 +32,12 @@ function FileUploadForm({
   setValues,
   values,
 }) {
-
   function handleChange(e, name, type, isExtraField) {
     let value;
     if (type === "number") value = e;
     else value = e.target.value;
     setFieldValue(name, value);
   }
-
 
   return (
     <form>
@@ -111,7 +108,6 @@ function FileUploadForm({
       >
         Continue
       </Button>
-      
     </form>
   );
 }

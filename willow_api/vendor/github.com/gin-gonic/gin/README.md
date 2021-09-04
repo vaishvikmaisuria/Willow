@@ -14,7 +14,6 @@
 
 Gin is a web framework written in Go (Golang). It features a martini-like API with performance that is up to 40 times faster thanks to [httprouter](https://github.com/julienschmidt/httprouter). If you need performance and good productivity, you will love Gin.
 
-
 ## Contents
 
 - [Gin Web Framework](#gin-web-framework)
@@ -137,7 +136,7 @@ Gin uses a custom version of [HttpRouter](https://github.com/julienschmidt/httpr
 [See all benchmarks](/BENCHMARKS.md)
 
 | Benchmark name                 |       (1) |             (2) |          (3) |             (4) |
-| ------------------------------ | ---------:| ---------------:| ------------:| ---------------:|
+| ------------------------------ | --------: | --------------: | -----------: | --------------: |
 | BenchmarkGin_GithubAll         | **43550** | **27364 ns/op** |   **0 B/op** | **0 allocs/op** |
 | BenchmarkAce_GithubAll         |     40543 |     29670 ns/op |       0 B/op |     0 allocs/op |
 | BenchmarkAero_GithubAll        |     57632 |     20648 ns/op |       0 B/op |     0 allocs/op |
@@ -463,8 +462,8 @@ instead of
 r := gin.Default()
 ```
 
-
 ### Using middleware
+
 ```go
 func main() {
 	// Creates a router without any middleware by default
@@ -504,6 +503,7 @@ func main() {
 ```
 
 ### Custom Recovery behavior
+
 ```go
 func main() {
 	// Creates a router without any middleware by default
@@ -537,6 +537,7 @@ func main() {
 ```
 
 ### How to write log file
+
 ```go
 func main() {
     // Disable Console Color, you don't need console color when writing the logs to file.
@@ -559,6 +560,7 @@ func main() {
 ```
 
 ### Custom Log Format
+
 ```go
 func main() {
 	router := gin.New()
@@ -591,6 +593,7 @@ func main() {
 ```
 
 **Sample Output**
+
 ```
 ::1 - [Fri, 07 Dec 2018 17:04:38 JST] "GET /ping HTTP/1.1 200 122.767µs "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36" "
 ```
@@ -646,6 +649,7 @@ Gin uses [**go-playground/validator/v10**](https://github.com/go-playground/vali
 Note that you need to set the corresponding binding tag on all fields you want to bind. For example, when binding from JSON, set `json:"fieldname"`.
 
 Also, Gin provides two sets of methods for binding:
+
 - **Type** - Must bind
   - **Methods** - `Bind`, `BindJSON`, `BindXML`, `BindQuery`, `BindYAML`, `BindHeader`
   - **Behavior** - These methods use `MustBindWith` under the hood. If there is a binding error, the request is aborted with `c.AbortWithError(400, err).SetType(ErrorTypeBind)`. This sets the response status code to 400 and the `Content-Type` header is set to `text/plain; charset=utf-8`. Note that if you try to set the response code after this, it will result in a warning `[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 400 with 422`. If you wish to have greater control over the behavior, consider using the `ShouldBind` equivalent method.
@@ -727,6 +731,7 @@ func main() {
 ```
 
 **Sample request**
+
 ```shell
 $ curl -v -X POST \
   http://localhost:8080/loginJSON \
@@ -902,6 +907,7 @@ func startPage(c *gin.Context) {
 ```
 
 Test it with:
+
 ```sh
 $ curl -X GET "localhost:8085/testing?name=appleboy&address=xyz&birthday=1992-03-15&createTime=1562400033000000123&unixTime=1562400033"
 ```
@@ -935,6 +941,7 @@ func main() {
 ```
 
 Test it with:
+
 ```sh
 $ curl -v localhost:8088/thinkerou/987fbc97-4bed-5078-9f07-9141ba07c9f3
 $ curl -v localhost:8088/thinkerou/not-uuid
@@ -1006,14 +1013,14 @@ form.html
 
 ```html
 <form action="/" method="POST">
-    <p>Check some colors</p>
-    <label for="red">Red</label>
-    <input type="checkbox" name="colors[]" value="red" id="red">
-    <label for="green">Green</label>
-    <input type="checkbox" name="colors[]" value="green" id="green">
-    <label for="blue">Blue</label>
-    <input type="checkbox" name="colors[]" value="blue" id="blue">
-    <input type="submit">
+  <p>Check some colors</p>
+  <label for="red">Red</label>
+  <input type="checkbox" name="colors[]" value="red" id="red" />
+  <label for="green">Green</label>
+  <input type="checkbox" name="colors[]" value="green" id="green" />
+  <label for="blue">Blue</label>
+  <input type="checkbox" name="colors[]" value="blue" id="blue" />
+  <input type="submit" />
 </form>
 ```
 
@@ -1062,6 +1069,7 @@ func main() {
 ```
 
 Test it with:
+
 ```sh
 $ curl -X POST -v --form name=user --form "avatar=@./avatar.png" http://localhost:8080/profile
 ```
@@ -1140,9 +1148,10 @@ func main() {
 	r.Run(":8080")
 }
 ```
+
 #### JSONP
 
-Using JSONP to request data from a server  in a different domain. Add callback to response body if the query parameter callback exists.
+Using JSONP to request data from a server in a different domain. Add callback to response body if the query parameter callback exists.
 
 ```go
 func main() {
@@ -1191,7 +1200,7 @@ func main() {
 
 #### PureJSON
 
-Normally, JSON replaces special HTML characters with their unicode entities, e.g. `<` becomes  `\u003c`. If you want to encode such characters literally, you can use PureJSON instead.
+Normally, JSON replaces special HTML characters with their unicode entities, e.g. `<` becomes `\u003c`. If you want to encode such characters literally, you can use PureJSON instead.
 This feature is unavailable in Go 1.6 and lower.
 
 ```go
@@ -1298,9 +1307,7 @@ templates/index.tmpl
 
 ```html
 <html>
-	<h1>
-		{{ .title }}
-	</h1>
+  <h1>{{ .title }}</h1>
 </html>
 ```
 
@@ -1328,10 +1335,9 @@ templates/posts/index.tmpl
 
 ```html
 {{ define "posts/index.tmpl" }}
-<html><h1>
-	{{ .title }}
-</h1>
-<p>Using posts/index.tmpl</p>
+<html>
+  <h1>{{ .title }}</h1>
+  <p>Using posts/index.tmpl</p>
 </html>
 {{ end }}
 ```
@@ -1340,10 +1346,9 @@ templates/users/index.tmpl
 
 ```html
 {{ define "users/index.tmpl" }}
-<html><h1>
-	{{ .title }}
-</h1>
-<p>Using users/index.tmpl</p>
+<html>
+  <h1>{{ .title }}</h1>
+  <p>Using users/index.tmpl</p>
 </html>
 {{ end }}
 ```
@@ -1420,6 +1425,7 @@ Date: {[{.now | formatAsDate}]}
 ```
 
 Result:
+
 ```
 Date: 2017/07/01
 ```
@@ -1439,6 +1445,7 @@ r.GET("/test", func(c *gin.Context) {
 ```
 
 Issuing a HTTP redirect from POST. Refer to issue: [#444](https://github.com/gin-gonic/gin/issues/444)
+
 ```go
 r.POST("/test", func(c *gin.Context) {
 	c.Redirect(http.StatusFound, "/foo")
@@ -1447,7 +1454,7 @@ r.POST("/test", func(c *gin.Context) {
 
 Issuing a Router redirect, use `HandleContext` like below.
 
-``` go
+```go
 r.GET("/test", func(c *gin.Context) {
     c.Request.URL.Path = "/test2"
     r.HandleContext(c)
@@ -1456,7 +1463,6 @@ r.GET("/test2", func(c *gin.Context) {
     c.JSON(200, gin.H{"hello": "world"})
 })
 ```
-
 
 ### Custom Middleware
 
@@ -1580,6 +1586,7 @@ func main() {
 	http.ListenAndServe(":8080", router)
 }
 ```
+
 or
 
 ```go
@@ -1760,9 +1767,9 @@ endless.ListenAndServe(":4242", router)
 
 Alternatives:
 
-* [manners](https://github.com/braintree/manners): A polite Go HTTP server that shuts down gracefully.
-* [graceful](https://github.com/tylerb/graceful): Graceful is a Go package enabling graceful shutdown of an http.Handler server.
-* [grace](https://github.com/facebookgo/grace): Graceful restart & zero downtime deploy for Go servers.
+- [manners](https://github.com/braintree/manners): A polite Go HTTP server that shuts down gracefully.
+- [graceful](https://github.com/tylerb/graceful): Graceful is a Go package enabling graceful shutdown of an http.Handler server.
+- [grace](https://github.com/facebookgo/grace): Graceful restart & zero downtime deploy for Go servers.
 
 #### Manually
 
@@ -1997,13 +2004,13 @@ func SomeHandler(c *gin.Context) {
 }
 ```
 
-* `c.ShouldBindBodyWith` stores body into the context before binding. This has
-a slight impact to performance, so you should not use this method if you are
-enough to call binding at once.
-* This feature is only needed for some formats -- `JSON`, `XML`, `MsgPack`,
-`ProtoBuf`. For other formats, `Query`, `Form`, `FormPost`, `FormMultipart`,
-can be called by `c.ShouldBind()` multiple times without any damage to
-performance (See [#1341](https://github.com/gin-gonic/gin/pull/1341)).
+- `c.ShouldBindBodyWith` stores body into the context before binding. This has
+  a slight impact to performance, so you should not use this method if you are
+  enough to call binding at once.
+- This feature is only needed for some formats -- `JSON`, `XML`, `MsgPack`,
+  `ProtoBuf`. For other formats, `Query`, `Form`, `FormPost`, `FormMultipart`,
+  can be called by `c.ShouldBind()` multiple times without any damage to
+  performance (See [#1341](https://github.com/gin-gonic/gin/pull/1341)).
 
 ### http2 server push
 
@@ -2056,6 +2063,7 @@ func main() {
 ### Define format for the log of routes
 
 The default log of routes is:
+
 ```
 [GIN-debug] POST   /foo                      --> main.main.func1 (3 handlers)
 [GIN-debug] GET    /bar                      --> main.main.func2 (3 handlers)
@@ -2064,6 +2072,7 @@ The default log of routes is:
 
 If you want to log this information in given format (e.g. JSON, key values or something else), then you can define this format with `gin.DebugPrintRouteFunc`.
 In the example below, we log all routes with standard log package but you can use another log tools that suits of your needs.
+
 ```go
 import (
 	"log"
@@ -2208,10 +2217,10 @@ func TestPingRoute(t *testing.T) {
 
 Awesome project lists using [Gin](https://github.com/gin-gonic/gin) web framework.
 
-* [gorush](https://github.com/appleboy/gorush): A push notification server written in Go.
-* [fnproject](https://github.com/fnproject/fn): The container native, cloud agnostic serverless platform.
-* [photoprism](https://github.com/photoprism/photoprism): Personal photo management powered by Go and Google TensorFlow.
-* [krakend](https://github.com/devopsfaith/krakend): Ultra performant API Gateway with middlewares.
-* [picfit](https://github.com/thoas/picfit): An image resizing server written in Go.
-* [brigade](https://github.com/brigadecore/brigade): Event-based Scripting for Kubernetes.
-* [dkron](https://github.com/distribworks/dkron): Distributed, fault tolerant job scheduling system.
+- [gorush](https://github.com/appleboy/gorush): A push notification server written in Go.
+- [fnproject](https://github.com/fnproject/fn): The container native, cloud agnostic serverless platform.
+- [photoprism](https://github.com/photoprism/photoprism): Personal photo management powered by Go and Google TensorFlow.
+- [krakend](https://github.com/devopsfaith/krakend): Ultra performant API Gateway with middlewares.
+- [picfit](https://github.com/thoas/picfit): An image resizing server written in Go.
+- [brigade](https://github.com/brigadecore/brigade): Event-based Scripting for Kubernetes.
+- [dkron](https://github.com/distribworks/dkron): Distributed, fault tolerant job scheduling system.

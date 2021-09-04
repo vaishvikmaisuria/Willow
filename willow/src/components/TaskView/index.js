@@ -1,44 +1,14 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react"
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons"
-import { useTable, useSortBy } from "react-table"
+import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react";
+import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { useTable, useSortBy } from "react-table";
 import { withSnackbar } from "notistack";
 
-function TaskView({ fieldName, fieldValue }) {
-  const data = React.useMemo(
-    () => [
-      {
-        Stock: "APPL",
-        QuantityValue: "100",
-        PriceValue: "68",
-        CurrentPrice: "130",
-        DividendValue: "10",
-      },
-      {
-        Stock: "BCE",
-        QuantityValue: "100",
-        PriceValue: "65",
-        CurrentPrice: "55",
-        DividendValue: "10",
-      },
-      {
-        Stock: "ENB",
-        QuantityValue: "100",
-        PriceValue: "35",
-        CurrentPrice: "45",
-        DividendValue: "10",
-      },
-      {
-        Stock: "TD",
-        QuantityValue: "50",
-        PriceValue: "55",
-        CurrentPrice: "78",
-        DividendValue: "10",
-      },
-    ],
-    [],
-  )
+function TaskView(props) {
+  let { stockData } = props;
 
+  const data = React.useMemo(() => stockData, [stockData]);
+  // const data = stockData;
   const columns = React.useMemo(
     () => [
       {
@@ -51,7 +21,7 @@ function TaskView({ fieldName, fieldValue }) {
       },
       {
         Header: "Bought Price",
-        accessor: "PriceValue",
+        accessor: "BoughtValue",
       },
       {
         Header: "Current Price",
@@ -62,8 +32,8 @@ function TaskView({ fieldName, fieldValue }) {
         accessor: "DividendValue",
       },
     ],
-    [],
-  )
+    []
+  );
 
   const {
     getTableProps,
@@ -71,7 +41,7 @@ function TaskView({ fieldName, fieldValue }) {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy)
+  } = useTable({ columns, data }, useSortBy);
 
   return (
     <Table {...getTableProps()}>
@@ -100,7 +70,7 @@ function TaskView({ fieldName, fieldValue }) {
       </Thead>
       <Tbody {...getTableBodyProps()}>
         {rows.map((row) => {
-          prepareRow(row)
+          prepareRow(row);
           return (
             <Tr {...row.getRowProps()}>
               {row.cells.map((cell) => (
@@ -109,10 +79,10 @@ function TaskView({ fieldName, fieldValue }) {
                 </Td>
               ))}
             </Tr>
-          )
+          );
         })}
       </Tbody>
     </Table>
-  )
+  );
 }
 export default withSnackbar(TaskView);

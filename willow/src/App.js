@@ -25,7 +25,7 @@ function UnconnectedApp() {
         <Route exact path="/info" component={withRouter(InfoPage)} />
         <Route exact path="/assistant" component={withRouter(Assistant)} />
         <Route exact path="/stocks" component={withRouter(StockInfo)} />
-        
+
         <Route
           exact
           path="/not-found"
@@ -46,9 +46,9 @@ function ConnectedApp() {
   return (
     <ChakraProvider>
       <SnackbarProvider maxSnack={3}>
-          <Router>
-            <UnconnectedApp />
-          </Router>
+        <Router>
+          <UnconnectedApp />
+        </Router>
       </SnackbarProvider>
     </ChakraProvider>
   );

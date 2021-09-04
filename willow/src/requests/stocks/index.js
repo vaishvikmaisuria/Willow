@@ -8,12 +8,12 @@ export async function fetchDividend() {
 
 // Post request to add a Stock given body ("Symbol",	"Price", "Quantity")
 export async function addStock(body) {
-  let data = body.values
+  let data = body.values;
   //validation for prohibited keys
   const reqBody = {
     Symbol: data.name ? data.name : "NONE",
     Price: data.price ? data.price : "0",
-    Quantity: data.quantity ? data.quantity : "0"
+    Quantity: data.quantity ? data.quantity : "0",
   };
   try {
     const response = await postRequest("/addStock/", reqBody);

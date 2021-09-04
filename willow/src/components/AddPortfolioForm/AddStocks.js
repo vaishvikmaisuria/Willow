@@ -11,9 +11,8 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { addStock } from "../../requests/stocks";
 
-// Single row of Stock input containing stock name and quantity,price and delete symbol 
+// Single row of Stock input containing stock name and quantity,price and delete symbol
 function StockInput({
   index,
   stock,
@@ -22,7 +21,6 @@ function StockInput({
   handleQtyChange,
   handleDelete,
 }) {
-
   return (
     <Flex
       display="flex"
@@ -45,7 +43,7 @@ function StockInput({
         key={`input-${index}`}
         width="40%"
       />
-      <Tooltip label="Quantity of Stock" fontSize="md">      
+      <Tooltip label="Quantity of Stock" fontSize="md">
         <NumberInput
           m={2}
           min={0}
@@ -66,7 +64,7 @@ function StockInput({
         </NumberInput>
       </Tooltip>
       <Tooltip label="Price of Stock" fontSize="md">
-      <NumberInput
+        <NumberInput
           m={2}
           min={0}
           name={`price_per_stock,${index}`}
@@ -83,7 +81,7 @@ function StockInput({
             <NumberIncrementStepper />
             <NumberDecrementStepper />
           </NumberInputStepper>
-        </NumberInput> 
+        </NumberInput>
       </Tooltip>
       <Button
         aria-label="Delete stock"
@@ -100,11 +98,10 @@ function StockInput({
 
 // Add Stock mechanism for stage 2 of add task form -> to configure number of stocks
 function AddStocks({ values, setFieldValue }) {
-  
-  let stock_names = values.symbol_per_stock ;
+  let stock_names = values.stock_names;
   let price_per_stock = values.price_per_stock;
   let quantity_per_stock = values.quantity_per_stock;
-  
+
   const handleAddition = () => {
     stock_names.push(`Stock ${stock_names.length + 1}`);
     price_per_stock.push(0);
@@ -121,7 +118,7 @@ function AddStocks({ values, setFieldValue }) {
     }
   };
 
-  const handleQtyChange  = (index, value) => {
+  const handleQtyChange = (index, value) => {
     if (index >= 0 && index < quantity_per_stock.length) {
       quantity_per_stock[index] = value;
       setFieldValue("quantity_per_stock", quantity_per_stock);
@@ -146,35 +143,31 @@ function AddStocks({ values, setFieldValue }) {
 
   let i = 0;
   let stocks = [];
-  console.log()
-  if ( stock_names.length > 0 ){
+  if (stock_names.length > 0) {
     for (i = 0; i < stock_names.length; i++) {
       stocks.push([stock_names[i], price_per_stock[i], quantity_per_stock[i]]);
     }
   }
 
-  
-  
   return (
     <>
-        <Button mt={2} onClick={handleAddition} >
-          Add Stock
-        </Button>
-        {stocks.length > 0 &&
-          stocks.map((stock, index) => {
-            return (
-              <StockInput
-                key={index}
-                index={index}
-                stock={stock}
-                handleNameChange={handleNameChange}
-                handlePriceChange={handlePriceChange}
-                handleQtyChange={handleQtyChange}
-                handleDelete={handleDelete}
-              />
-            );
-          })
-        }
+      <Button mt={2} onClick={handleAddition}>
+        Add Stock
+      </Button>
+      {stocks.length > 0 &&
+        stocks.map((stock, index) => {
+          return (
+            <StockInput
+              key={index}
+              index={index}
+              stock={stock}
+              handleNameChange={handleNameChange}
+              handlePriceChange={handlePriceChange}
+              handleQtyChange={handleQtyChange}
+              handleDelete={handleDelete}
+            />
+          );
+        })}
     </>
   );
 }

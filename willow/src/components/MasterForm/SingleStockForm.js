@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Link,
-} from "@chakra-ui/react";
+import { Box, Button, Link } from "@chakra-ui/react";
 import { withSnackbar } from "notistack";
 import { InputField } from "../InputFieldForm";
 
-// Model of form according to information about the task 
+// Model of form according to information about the task
 const firstStage = [
   {
     name: "name",
@@ -32,7 +28,7 @@ const firstStage = [
   },
 ];
 
-// First form for adding task containing option of connector, preloaded configuration, questions 
+// First form for adding task containing option of connector, preloaded configuration, questions
 function SingleStockForm({
   enqueueSnackbar,
   resetForm,
@@ -43,7 +39,6 @@ function SingleStockForm({
   handleSubmit,
   values,
 }) {
-
   function handleChange(e, name, type, isExtraField) {
     let value;
     if (type === "number") value = e;
@@ -74,14 +69,13 @@ function SingleStockForm({
           );
         })}
       </Box>
-      
-      
+
       <Button
         disabled={validate()}
         m={3}
         style={{ float: "right" }}
         variantcolor="blue"
-        onClick={()=> handlebtnSubmit()}
+        onClick={() => handlebtnSubmit()}
       >
         <Link to="/">Submit</Link>
       </Button>
